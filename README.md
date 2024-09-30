@@ -2,6 +2,8 @@
 
 Introducción
 
-Objetivo general (sólo uno, luego también hay objetivos específicos- preguntas a responder)
+Objetivo general (sólo uno)
+
+Métodos/resultados (respuesta a las preguntas de objetivos específicos)
 
 Referencias
