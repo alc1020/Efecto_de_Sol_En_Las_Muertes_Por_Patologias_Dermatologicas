@@ -1,0 +1,36 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20241007";
+CHARSET="ANSI";
+SUBJECT-AREA="Salud";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Defunciones por causas (capítulos) por sexo y Comunidad Autónoma";
+CONTENTS="Defunciones";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=0;
+SHOWDECIMALS=0;
+STUB="Sexo","Comunidades y Ciudades Autónomas";
+HEADING="Periodo","Causa de muerte";
+VALUES("Sexo")="Total";
+VALUES("Comunidades y Ciudades Autónomas")="Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla","Extranjero";
+VALUES("Periodo")="2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011",
+"2010";
+VALUES("Causa de muerte")="073  XII.Enfermedades de la piel y del tejido subcutáneo";
+CODES("Comunidades y Ciudades Autónomas")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19","null";
+MAP("Comunidades y Ciudades Autónomas")="spain_regions_img_ind";
+SOURCE="Instituto Nacional de Estadística";
+UNITS="Personas";
+DATA=".." 2043.0 2021.0 1902.0 1775.0 1826.0 1691.0 1523.0 1563.0 1318.0 1290.0 1306.0 1169.0 1144.0 ".." 182.0 247.0 280.0 285.0 304.0 264.0 237.0 230.0 238.0 241.0 214.0 195.0 167.0 ".." 37.0 33.0 57.0 37.0 28.0 21.0 25.0 47.0 31.0 23.0 42.0 40.0 30.0 ".." 68.0 49.0 48.0 45.0 52.0 55.0 42.0
+ 50.0 24.0 40.0 40.0 44.0 37.0 ".." 51.0 43.0 34.0 32.0 30.0 45.0 30.0 21.0 35.0 28.0 29.0 27.0 30.0 ".." 164.0 145.0 107.0 110.0 97.0 92.0 76.0 74.0 63.0 46.0 61.0 36.0 30.0 ".." 35.0 37.0 25.0 18.0 17.0 13.0 9.0 8.0 25.0 27.0 23.0 21.0 31.0 ".." 169.0
+ 180.0 194.0 161.0 182.0 169.0 145.0 157.0 105.0 117.0 106.0 95.0 124.0 ".." 140.0 127.0 112.0 120.0 115.0 105.0 119.0 96.0 96.0 85.0 78.0 69.0 86.0 ".." 227.0 209.0 198.0 194.0 215.0 167.0 170.0 187.0 145.0 121.0 143.0 123.0 89.0 ".." 240.0 223.0 229.0 181.0 186.0 185.0 173.0 167.0 150.0
+ 146.0 157.0 150.0 160.0 ".." 72.0 83.0 73.0 44.0 49.0 45.0 39.0 35.0 33.0 26.0 29.0 23.0 37.0 ".." 175.0 148.0 146.0 139.0 150.0 141.0 145.0 146.0 140.0 149.0 140.0 98.0 100.0 ".." 271.0 258.0 218.0 233.0 216.0 229.0 190.0 177.0 116.0 106.0 122.0 126.0 113.0 ".." 59.0 50.0 38.0
+ 54.0 74.0 71.0 40.0 48.0 38.0 37.0 29.0 45.0 31.0 ".." 30.0 39.0 33.0 28.0 31.0 24.0 18.0 25.0 10.0 23.0 16.0 15.0 22.0 ".." 96.0 122.0 89.0 68.0 56.0 49.0 56.0 81.0 59.0 59.0 59.0 51.0 44.0 ".." 18.0 13.0 15.0 20.0 15.0 12.0 4.0 4.0 3.0 9.0 9.0
+ 7.0 8.0 ".." 2.0 6.0 2.0 2.0 2.0 0.0 1.0 3.0 1.0 2.0 4.0 1.0 2.0 ".." 3.0 4.0 0.0 1.0 3.0 0.0 0.0 4.0 0.0 1.0 3.0 1.0 1.0 ".." 4.0 5.0 4.0 3.0 4.0 4.0 4.0 3.0 6.0 4.0 2.0 2.0 2.0;
