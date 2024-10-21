@@ -7,4 +7,4 @@ library(tidyjson)
 library (tidyverse)
 
 Datos_horas_sol <- fromJSON (file= )
-#cambiar los nombres y establecer una mejor ruta
+#establecer una mejor ruta
