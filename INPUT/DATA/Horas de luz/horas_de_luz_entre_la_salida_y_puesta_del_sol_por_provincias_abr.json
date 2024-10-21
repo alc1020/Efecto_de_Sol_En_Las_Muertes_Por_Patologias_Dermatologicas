@@ -1,0 +1,441 @@
+﻿{
+    "Url": "www.epdata.es/horas-luz-provincias/426bc5ff-693c-4711-9d30-006c72ae4fd4",
+    "Respuesta": {
+        "Id": "426bc5ff-693c-4711-9d30-006c72ae4fd4",
+        "Url": "www.epdata.es/horas-luz-provincias/426bc5ff-693c-4711-9d30-006c72ae4fd4",
+        "Titulo": "Horas de luz entre la salida y puesta del sol por provincias",
+        "Subtitulo": "(Abril)",
+        "Datos": {
+            "Metricas": [
+                {
+                    "Id": 0,
+                    "Nombre": "Salida y puesta del sol a nivel mensual - Media de horas de luz para Albacete, Alicante, Almería, Ávila, Badajoz, Barcelona, Vizcaya, Burgos, Cáceres, Cádiz, Castellón, Ceuta, Ciudad Real, Córdoba, A Coruña, Cuenca, Guipúzcoa , Girona, Granada, Guadalajara, Huelva, Huesca, Jaén, León, Lleida, La Rioja, Lugo, Madrid, Málaga, Melilla, Murcia, Ourense, Asturias, Palencia, Islas Baleares, Las Palmas, Navarra, Pontevedra, Salamanca, Santa Cruz Tenerife, Cantabria, Segovia, Sevilla, Soria, Tarragona, Teruel, Toledo, Valencia, Valladolid, Álava, Zamora, Zaragoza como provincia",
+                    "SonDatosNumericos": true,
+                    "Fuente": "IGN",
+                    "Clasificacion": null,
+                    "Unidad": "Media de horas de luz",
+                    "Escala": "Unidades",
+                    "EscalaFactorPotencia10": 0,
+                    "Datos": [
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Álava",
+                            "Valor": 13.4055556,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Albacete",
+                            "Valor": 13.2338889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Alicante",
+                            "Valor": 13.2083333,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Almería",
+                            "Valor": 13.1494444,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Ávila",
+                            "Valor": 13.3066667,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Badajoz",
+                            "Valor": 13.2294444,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Islas Baleares",
+                            "Valor": 13.2572222,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Barcelona",
+                            "Valor": 13.3383333,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Burgos",
+                            "Valor": 13.3822222,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Cáceres",
+                            "Valor": 13.2527778,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Cádiz",
+                            "Valor": 13.1372222,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Castellón",
+                            "Valor": 13.275,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Ciudad Real",
+                            "Valor": 13.2355556,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Córdoba",
+                            "Valor": 13.19,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "A Coruña",
+                            "Valor": 13.4305556,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Cuenca",
+                            "Valor": 13.2816667,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Girona",
+                            "Valor": 13.365,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Granada",
+                            "Valor": 13.1627778,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Guadalajara",
+                            "Valor": 13.3038889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Guipúzcoa ",
+                            "Valor": 13.4272222,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Huelva",
+                            "Valor": 13.1655556,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Huesca",
+                            "Valor": 13.3716667,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Jaén",
+                            "Valor": 13.1861111,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "León",
+                            "Valor": 13.3938889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Lleida",
+                            "Valor": 13.3488889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "La Rioja",
+                            "Valor": 13.3866667,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Lugo",
+                            "Valor": 13.4138889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Madrid",
+                            "Valor": 13.2944444,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Málaga",
+                            "Valor": 13.1438889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Murcia",
+                            "Valor": 13.1938889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Navarra",
+                            "Valor": 13.4044444,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Ourense",
+                            "Valor": 13.3822222,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Asturias",
+                            "Valor": 13.43,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Palencia",
+                            "Valor": 13.3683333,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Las Palmas",
+                            "Valor": 12.8438889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Pontevedra",
+                            "Valor": 13.3877778,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Salamanca",
+                            "Valor": 13.3211111,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Santa Cruz de Tenerife",
+                            "Valor": 12.8555556,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Cantabria",
+                            "Valor": 13.4344444,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Segovia",
+                            "Valor": 13.3188889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Sevilla",
+                            "Valor": 13.1711111,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Soria",
+                            "Valor": 13.3561111,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Tarragona",
+                            "Valor": 13.3261111,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Teruel",
+                            "Valor": 13.2916667,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Toledo",
+                            "Valor": 13.2688889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Valencia",
+                            "Valor": 13.2522222,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Valladolid",
+                            "Valor": 13.35,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Vizcaya",
+                            "Valor": 13.4238889,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Zamora",
+                            "Valor": 13.3433333,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Zaragoza",
+                            "Valor": 13.3505556,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Ceuta",
+                            "Valor": 13.1122222,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        },
+                        {
+                            "Agno": 2018,
+                            "Periodo": "Abril",
+                            "Parametro": "Melilla",
+                            "Valor": 13.09,
+                            "Estado": "Definitivo",
+                            "Notas": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
