@@ -1,6 +1,6 @@
 library(greenR)
 
-datacas <- get_osm_data("Castellon, Spain")
+datagor <- get_osm_data("Gorliz, Spain")
 
 green_index <- calculate_green_index(dataGor, 4326, 100)
 percentage <- calculate_percentage(green_index)
@@ -15,26 +15,27 @@ View(percentage)
 #De media y un porcentage
 #De alta y un porcentage
 
-vector_provincias <- c("La Coruña, Spain","Lugo, Spain","Pontevedra, Spain","Orense, Spain",
-                       "Asturias, Spain",
-                       "Cantabria, Spain",
-                       "Vizcaya, Spain", "Guipuzcoa, Spain", "Alava, Spain",
-                       "Navarra, Spain", 
-                       "La Rioja, Spain",
-                       "Castellon, Spain", "Valencia, Spain", "Alicante, Spain",
-                       "Madrid, Spain",
-                       "Gerona, Spain", "Barcelona, Spain", "Lerida, Spain", "Tarragona, Spain", 
-                       "Huesca, Spain", "Zaragoza, Spain", "Teruel, Spain",
-                       "Leon, Spain", "Palencia, Spain", "Burgos, Spain", "Soria, Spain", "Zamora, Spain", "Valladolid, Spain", "Segovia, Spain", "Salamanca, Spain", "Avila, Spain",
-                       "Guadalajara, Spain", "Cuenca, Spain", "Albacete, Spain", "Toledo, Spain", "Ciudad Real, Spain",
-                       "Caceres, Spain", "Badajoz, Spain",
-                       "Murcia, Spain",
-                       "Huelva, Spain", "Sevilla, Spain", "Cordoba, Spain", "Jaen, Spain", "Cadiz, Spain", "Malaga, Spain", "Granada, Spain", "Almeria, Spain",
-                       "Islas Baleares, Spain",
-                       "Santa Cruz de Tenerife, Spain", "Las Pamas, Spain",
-                       "Ceuta, Spain",
-                       "Melilla, Spain"
-                       )
+vector_provincias <- c#("La Coruña, Spain","Lugo, Spain","Pontevedra, Spain","Orense, Spain",
+                      #( "Asturias, Spain")
+                      # "Cantabria, Spain",
+                      # "Vizcaya, Spain", "Guipuzcoa, Spain", "Alava, Spain",
+                      # "Navarra, Spain", 
+                      # "La Rioja, Spain",
+                      # "Castellon, Spain", "Valencia, Spain", "Alicante, Spain",
+                       #"Madrid, Spain",
+                      # "Gerona, Spain", "Barcelona, Spain", "Lerida, Spain", "Tarragona, Spain", 
+                      # "Huesca, Spain", "Zaragoza, Spain", "Teruel, Spain",
+                      # "Leon, Spain", "Palencia, Spain", "Burgos, Spain", "Soria, Spain", "Zamora, Spain", "Valladolid, Spain", "Segovia, Spain", "Salamanca, Spain", "Avila, Spain",
+                      # "Guadalajara, Spain", "Cuenca, Spain", "Albacete, Spain", "Toledo, Spain", "Ciudad Real, Spain",
+                      # "Caceres, Spain", "Badajoz, Spain",
+                      # "Murcia, Spain",
+                      # "Huelva, Spain", "Sevilla, Spain", "Cordoba, Spain", "Jaen, Spain", "Cadiz, Spain", "Malaga, Spain", "Granada, Spain", "Almeria, Spain",
+                      # "Islas Baleares, Spain",
+                      # "Santa Cruz de Tenerife, Spain", "Las Pamas, Spain",
+                      # "Ceuta, Spain",
+                      # "Melilla, Spain"
+                      # )
+
 porcent = c()
 for (i in vector_provincias){
   datos <- get_osm_data(i)
@@ -44,3 +45,7 @@ for (i in vector_provincias){
 }
 DF<-data.frame(vector_provincias,porcent)
 DF
+
+
+
+#write_csv(DF) PARA CUANDO ESTE TERMINADO EL DF
