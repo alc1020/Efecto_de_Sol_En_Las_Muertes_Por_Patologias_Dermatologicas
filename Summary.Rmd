@@ -1,30 +1,26 @@
 ---
-title: "SEMINARIO_FUENTES"
-author: "Las rials"
-date: "`r Sys.Date()`"
+title: "Seminario de Fuentes de Datos Biomédicas y Web Semántica"
+author: "Carmen Ruiz Alonso, Anna Lázaro Caminero y Silvia Tobes García"
+date: "Curso 2024/25"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+# Introducción
 
-## R Markdown
+A través de la resolución de este seminario, se pretende adquirir las competencias necesarias para el manejo de datos no estructurados o semiestructurados mediante su obtención, estructuración, manipulación y análisis.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# Objetivo
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Nuestro propósito es establecer una relación entre la tasa de cáncer de piel en España en distintas regiones, con diversos factores medioambientales que podrían tener efectos significativos sobre esta patología.
 
-```{r cars}
-summary(cars)
-```
+# Metodología
 
-## Including Plots
+Hemos accedido a distintas fuentes de datos para recopilar información acerca de las horas de sol en España por provincias, así como el índice de radiación UV, las áreas verdes y el número de muertes por cáncer de piel.
 
-You can also embed plots, for example:
+## 1. Búsqueda de datos
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+## 2. Estructuración y manipulación de los datos
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## 3. Análisis de datos
+
+## 4. Comparación
