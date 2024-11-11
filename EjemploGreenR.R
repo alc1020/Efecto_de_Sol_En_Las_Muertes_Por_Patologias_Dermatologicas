@@ -1,21 +1,5 @@
 library(greenR)
 
-datagor <- get_osm_data("Gorliz, Spain")
-dataron <- get_osm_data("La Rondilla")
-
-green_index <- calculate_green_index(dataGor, 4326, 100)
-percentage <- calculate_percentage(green_index)
-View(percentage)
-
-?calculate_percentage
-
-#dataElex <- get_osm_data("Elexalde, Gorliz, Spain")
-#dataLaRond <- get_osm_data("La Rondilla, Valladolid, Spain")
-#El indice lo divide en tres categorias, la baja, la  media y la alta, nosotras hemos trabajado solo con los de la alta
-#De baja categoria y un porcentaje
-#De media y un porcentage
-#De alta y un porcentage
-
 vector_provincias <- c("La Coruña, Spain", "Lugo, Spain", "Pontevedra, Spain", "Orense, Spain",
                       "Asturias, Spain",
                       "Cantabria, Spain",
@@ -31,17 +15,55 @@ vector_provincias <- c("La Coruña, Spain", "Lugo, Spain", "Pontevedra, Spain", 
                       "Caceres, Spain", "Badajoz, Spain",
                       "Murcia, Spain",
                       "Huelva, Spain", "Sevilla, Spain", "Cordoba, Spain", "Jaen, Spain", "Cadiz, Spain", "Malaga, Spain", "Granada, Spain", "Almeria, Spain",
-                      "Islas Baleares, Spain",
-                      "Santa Cruz de Tenerife, Spain", "Las Palmas, Spain",
+                      "Mallorca, Spain", "Menorca, Spain",
+                      "El hierro, Spain", "Gran Canaria, Spain", "La Gomera, Spain", "La Palma, Spain", "Tenerife, Spain",
                       "Ceuta, Spain",
                       "Melilla, Spain"
                       )
-vector_relevante <- c()
-vector_comunidades <- c()
+vector_relevante <- c("Pontedeume, Spain", "Cervantes, Spain", "O Grove, Spain", "Rubiá, Spain",
+                      "Cangas de Onís, Spain",
+                      "Potes, Spain",
+                      "Gernika, Spain", "Oiartzun, Spain", "Arraia-Maeztu, Spain",
+                      "Ochagavía, Spain",
+                      "Villoslada de Cameros, Spain",
+                      "Morella, Spain", "Parque Natural de la Albufera, Spain", "Sierra de Mariola, Spain",
+                      "Rascafría, Spain",
+                      "Cadaqués, Spain", "Montseny , Spain", "Espot , Spain", "Deltebre, Spain",
+                      "Torla, Spain", "Añón de Moncayo, Spain", "Tramacastilla, Spain",
+                      " Posada de Valdeón, Spain", " Cervera de Pisuerga, Spain", "Covarrubias, Spain", "Ucero, Spain", "Galende, Spain", "Castronuño, Spain", "Sepúlveda, Spain", "La Alberca, Spain", "Hoyos del Espino, Spain",
+                      "Cantalojas, Spain", "Beteta, Spain", "Ossa de Montiel, Spain", "Los Navalucillos, Spain", "Villarrubia de los Ojos, Spain",
+                      "Torrejón el Rubio, Spain", "Alange , Spain",
+                      "Alhama de Murcia, Spain",
+                      "El Rocío, Spain", "La Puebla del Río, Spain", "Hornachuelos, Spain", "Cazorla, Spain", "Grazalema, Spain", "Ronda, Spain", "Capileira, Spain", "Níjar, Spain", 
+                      "Escorca, Spain", "Es Mercadal, Spain",
+                      "Sabinosa, Spain", "Tejeda, Spain", "Hermigua, Spain", "El Paso, Spain", "La Orotava, Spain",
+                      "Monte Hacho, Spain",
+                      "Gurugú y Parque Forestal de Rostrogordo, Spain"
+                      )
+
+vector_comunidades <- c("Galicia",
+                        "Asturias",
+                        "Cantabria",
+                        "Pais Vasco",
+                        "Navarra",
+                        "La Rioja",
+                        "Comunidad Valenciana",
+                        "Madrid",
+                        "Cataluña",
+                        "Aragón",
+                        "Castilla y León",
+                        "Castilla La Mancha",
+                        "Extremadura",
+                        "Murcia",
+                        "Andalucía",
+                        "Islas Baleares",
+                        "Islas Canarias",
+                        "Ceuta", 
+                        "Melilla")
 
 
 porcent = c()
-for (i in vector_provincias){
+for (i in vector_relevante){
   datos <- get_osm_data(vector_provincias[i])
   green_index <- calculate_green_index(datos, 4326, 100)
   percentage <- calculate_percentage(green_index)
