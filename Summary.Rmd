@@ -19,10 +19,12 @@ Hemos accedido a distintas fuentes de datos para recopilar información acerca d
 ## 1. Búsqueda de datos. Mapas
 
 ### 1.1 Índice anual de enfermedades de piel y subcutáneas por comunidades autónomas
+Datos proporcionados por el Instituto Nacional de Estadística que nos indican la cantidad de personas que fallecen debido a patologías cutáneas y subcutáneas anualmente. Están disponibles los datos desde el año 2010 al año 2022.
 
-
+Para un manejo más eficiente, sólo utilizaremos las del año 2022 en conjunto con los datos aportados por AEMET.
 
 ### 1.2 Zonas verdes distribuidas por comunidades autónomas
+Usando greenR obtenemos datos relevantes a la distribución de zonas verdes del país. Así, accedemos a una serie de ubicaciones representativas de cada provincia, con estos valores realizamos una media para obtener una representación apropiada para cada comunidad autónoma. 
 
 
 ![Índice de vegetación](INPUT/mapas/indice_vegetacion.png)
