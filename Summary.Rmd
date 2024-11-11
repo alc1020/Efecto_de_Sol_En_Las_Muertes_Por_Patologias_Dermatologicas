@@ -21,16 +21,17 @@ Hemos accedido a distintas fuentes de datos para recopilar información acerca d
 
 
 
-### Mapas
+### MAPAS
 
-{r, echo=FALSE, fig.cap="Nubosidad"}
-knitr::include_graphics("INPUT\mapas\dias_niebla.png")
+![Nubosidad](INPUT/mapas/dias_niebla.png)
+**Figura 1:** Nubosidad
 
-{r, echo=FALSE, fig.cap="Horas de insolación"}
-knitr::include_graphics("INPUT/mapas/horas_insolacion.png")
+![Horas de insolación](INPUT/mapas/horas_insolacion.png)
+**Figura 2:** Horas de insolación
 
-{r, echo=FALSE, fig.cap="Índice de vegetación"}
-knitr::include_graphics("INPUT/mapas/indice_vegetacion.png")
+![Índice de vegetación](INPUT/mapas/indice_vegetacion.png)
+**Figura 3:** Índice de vegetación
+
 
 ## 2. Estructuración y manipulación de los datos
 
