@@ -39,6 +39,7 @@ Datos relativos a la radiación ultravioleta desde AEMET, por su posible relaci�
 
 ## 2. Estructuración y manipulación de los datos
 
+
 ## 3. Análisis de datos
 
 ## 4. Comparación
