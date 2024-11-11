@@ -2,7 +2,6 @@
 title: "Seminario de Fuentes de Datos Biomédicas y Web Semántica"
 author: "Carmen Ruiz Alonso, Anna Lázaro Caminero y Silvia Tobes García"
 date: "Curso 2024/25"
-output: html_document
 ---
 
 # Introducción
@@ -19,18 +18,22 @@ Hemos accedido a distintas fuentes de datos para recopilar información acerca d
 
 ## 1. Búsqueda de datos
 
+### 1.1 Índice anual de enfermedades de piel y subcutáneas por comunidades autónomas
 
 
-### MAPAS
+### 1.2 Zonas verdes distribuidas por comunidades autónomas
 
-![Nubosidad](INPUT/mapas/dias_niebla.png)
-**Figura 1:** Nubosidad
-
-![Horas de insolación](INPUT/mapas/horas_insolacion.png)
-**Figura 2:** Horas de insolación
 
 ![Índice de vegetación](INPUT/mapas/indice_vegetacion.png)
-**Figura 3:** Índice de vegetación
+**Figura 1:** Índice de vegetación
+
+
+### 1.3 Variación meteorológica respectiva a radiación solar
+
+Datos relativos a la radiación ultravioleta, por su posible relación con la incidencia de mutaciones cutáneas cuando la piel está expuesta al sol en diferentes zonas de España.
+
+![Índice de radiación solar](INPUT/mapas/indice_radiacion.png)
+**Figura 2:** Índice de radiación solar
 
 
 ## 2. Estructuración y manipulación de los datos
