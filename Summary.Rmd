@@ -19,6 +19,19 @@ Hemos accedido a distintas fuentes de datos para recopilar información acerca d
 
 ## 1. Búsqueda de datos
 
+
+
+### Mapas
+
+{r, echo=FALSE, fig.cap="Nubosidad"}
+knitr::include_graphics("INPUT\mapas\dias_niebla.png")
+
+{r, echo=FALSE, fig.cap="Horas de insolación"}
+knitr::include_graphics("INPUT/mapas/horas_insolacion.png")
+
+{r, echo=FALSE, fig.cap="Índice de vegetación"}
+knitr::include_graphics("INPUT/mapas/indice_vegetacion.png")
+
 ## 2. Estructuración y manipulación de los datos
 
 ## 3. Análisis de datos
