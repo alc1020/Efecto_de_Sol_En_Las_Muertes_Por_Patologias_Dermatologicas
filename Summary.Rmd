@@ -4,6 +4,10 @@ author: "Carmen Ruiz Alonso, Anna Lázaro Caminero y Silvia Tobes García"
 date: "Curso 2024/25"
 ---
 
+#Repositorio
+
+Url del repositorio: https://github.com/alc1020/SEMINARIO_FUENTES 
+
 # Introducción
 
 A través de la resolución de este seminario, se pretende adquirir las competencias necesarias para el manejo de datos no estructurados o semiestructurados mediante su obtención, estructuración, manipulación y análisis.
