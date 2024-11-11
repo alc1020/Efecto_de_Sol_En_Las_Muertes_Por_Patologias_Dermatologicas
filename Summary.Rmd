@@ -16,9 +16,10 @@ Nuestro propósito es establecer una relación entre la tasa de cáncer de piel 
 
 Hemos accedido a distintas fuentes de datos para recopilar información acerca de las horas de sol en España por provincias, así como el índice de radiación UV, las áreas verdes y el número de muertes por cáncer de piel.
 
-## 1. Búsqueda de datos y mapas
+## 1. Búsqueda de datos. Mapas
 
 ### 1.1 Índice anual de enfermedades de piel y subcutáneas por comunidades autónomas
+
 
 
 ### 1.2 Zonas verdes distribuidas por comunidades autónomas
