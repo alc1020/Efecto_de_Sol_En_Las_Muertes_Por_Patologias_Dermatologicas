@@ -396,6 +396,17 @@ cutáneas y subcutáneas anualmente. Están disponibles los datos desde el
 año 2010 al año 2022.</p>
 <p>Para un manejo más eficiente, sólo utilizaremos las del año 2022 en
 conjunto con los datos aportados por AEMET.</p>
+<pre class="r"><code>library(readr)
+Defunciones_2022 &lt;- read_delim(file = &quot;INPUT/DATA/defunciones_2022 csv.csv&quot;,
+                                  delim = &quot;;&quot;, escape_double = FALSE, trim_ws = TRUE)</code></pre>
+<pre><code>## Rows: 19 Columns: 3
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (1): Nombre
+## dbl (2): ID, Valor
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div id="zonas-verdes-distribuidas-por-comunidades-autónomas" class="section level3">
 <h3>1.2 Zonas verdes distribuidas por comunidades autónomas</h3>
