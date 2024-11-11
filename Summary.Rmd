@@ -2,6 +2,7 @@
 title: "Seminario de Fuentes de Datos Biomédicas y Web Semántica"
 author: "Carmen Ruiz Alonso, Anna Lázaro Caminero y Silvia Tobes García"
 date: "Curso 2024/25"
+output: html_document
 ---
 
 # Repositorio
