@@ -1,3 +1,0 @@
-# LOS DATOS NO SON VÁLIDOS
-
-
