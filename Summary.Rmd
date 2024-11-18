@@ -1,5 +1,5 @@
 ---
-title: "Seminario de Fuentes de Datos Biomédicas y Web Semántica"
+title: "Efectos de factores ambientales y climatologicos en el desarrollo de patologías dermatológicas en España"
 author: "Carmen Ruiz Alonso, Anna Lázaro Caminero y Silvia Tobes García"
 date: "Curso 2024/25"
 output: html_document
@@ -12,14 +12,19 @@ output: html_document
 # Repositorio
 
 Url del repositorio: https://github.com/alc1020/SEMINARIO_FUENTES 
+Participantes: cra1009@alu.ubu.es , stg1004@alu.ubu.es y alc1020@alu.ubu.es
+
+#Resumen
+
+Durante la resolución de este seminario se pretenderá establecer una relación entre los efectos de los rayos ultravioleta, las horas de luz en el día y las zonas verdes en la obtención de cualquier patología dermatológica a nivel nacional.
 
 # Introducción
 
-A través de la resolución de este seminario, se pretende adquirir las competencias necesarias para el manejo de datos no estructurados o semiestructurados mediante su obtención, estructuración, manipulación y análisis.
+Las patologías a nivel dermatológico son un problema.
 
 # Objetivo
 
-Nuestro propósito es establecer una relación entre la tasa de cáncer de piel en España en distintas regiones, con diversos factores medioambientales que podrían tener efectos significativos sobre esta patología.
+Los objetivos lo tendremos cuando hagamos el seminario.
 
 # Metodología
 
