@@ -3,11 +3,14 @@
 library(readr)
 library(tidyverse)
 
-Datos_insolacion <- read_delim(file = "INPUT/DATA/Maestroinsolacion2022.csv",
+Horas_de_sol <- read_delim(file = "INPUT/DATA/Horas_de_sol csv.csv",
                                delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-Datos_insolacion
+Horas_de_sol
 
-str(Datos_insolacion)
-summary(Datos_insolacion)
-view(Datos_insolacion)
+str(Horas_de_sol)
+summary(Horas_de_sol)
+view(Horas_de_sol)
+
+# Hacemos un dataframe con la media de horas de sol por provincia, agrupadas por comunidad autónoma
+
