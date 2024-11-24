@@ -63,18 +63,30 @@ vector_comunidades <- c("Andalucía",
                         )
                         
                         
+
+vector_provincias <- c("Huelva", "Sevilla", "Cordoba", "Jaen", "Cadiz", "Malaga", "Granada", "Almeria", "Huesca", "Zaragoza", "Teruel","Huelva, Spain", "Sevilla, Spain", "Cordoba, Spain", "Jaen, Spain", "Cadiz, Spain", "Malaga, Spain", "Granada, Spain", "Almeria, Spain", "Huesca, Spain", "Zaragoza, Spain", "Teruel, Spain")
+vector_relevante <- c("El Rocío, Spain", "La Puebla del Río, Spain", "Hornachuelos, Spain", "Cazorla, Spain", "Grazalema, Spain", "Ronda, Spain", "Capileira, Spain", "Níjar, Spain", "Torla, Spain", "Añón de Moncayo, Spain", "Tramacastilla, Spain")
                         
+vector_relevante<-c("La rondilla, Spain", "Gorliz, Spain")
+vector_provincias<-c("La rondilla, Spain",  "Gorliz, Spain")
 
 
 porcent = c()
-for (i in vector_relevante){
-  datos <- get_osm_data(vector_provincias[i])
+for (i in vector_provincias){
+  datos <- get_osm_data(i)
   green_index <- calculate_green_index(datos, 4326, 100)
   percentage <- calculate_percentage(green_index)
   porcent = c(porcent, percentage$percentage[3])
+  print (porcent)
 }
 DF<-data.frame(vector_provincias,porcent)
 DF
+
+datos<-get_osm_data("La rondilla, Spain")
+green_index <- calculate_green_index(datos, 4326, 100)
+percentage <- calculate_percentage(green_index)
+porcent = c(porcent, percentage$percentage[3])
+
 
 
 
