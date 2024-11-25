@@ -5,7 +5,7 @@ date: "Curso 2024/25"
 output: html_document
 ---
 
-# Índice de contenidos:
+# Índice de contenidos
 
 
 
@@ -70,26 +70,6 @@ vector_provincias <- c("Huelva, Spain", "Sevilla, Spain", "Cordoba, Spain", "Jae
                        "Ceuta, Spain", 
                        "Melilla, Spain" 
                        )
-vector_relevante <- c("El Rocío, Spain", "La Puebla del Río, Spain", "Hornachuelos, Spain", "Cazorla, Spain", "Grazalema, Spain", "Ronda, Spain", "Capileira, Spain", "Níjar, Spain", 
-                      "Torla, Spain", "Añón de Moncayo, Spain", "Tramacastilla, Spain",
-                      "Cangas de Onís, Spain", 
-                      "Escorca, Spain", "Es Mercadal, Spain", 
-                      "Sabinosa, Spain", "Tejeda, Spain", "Hermigua, Spain", "El Paso, Spain", "La Orotava, Spain", 
-                      "Potes, Spain", 
-                      " Posada de Valdeón, Spain", " Cervera de Pisuerga, Spain", "Covarrubias, Spain", "Ucero, Spain", "Galende, Spain", "Castronuño, Spain", "Sepúlveda, Spain", "La Alberca, Spain", "Hoyos del Espino, Spain", 
-                      "Cantalojas, Spain", "Beteta, Spain", "Ossa de Montiel, Spain", "Los Navalucillos, Spain", "Villarrubia de los Ojos, Spain",
-                      "Cadaqués, Spain", "Montseny , Spain", "Espot , Spain", "Deltebre, Spain", 
-                      "Morella, Spain", "Parque Natural de la Albufera, Spain", "Sierra de Mariola, Spain", 
-                      "Torrejón el Rubio, Spain", "Alange , Spain",
-                      "Pontedeume, Spain", "Cervantes, Spain", "O Grove, Spain", "Rubiá, Spain", 
-                      "Rascafría, Spain", 
-                      "Alhama de Murcia, Spain",
-                      "Ochagavía, Spain", 
-                      "Gernika, Spain", "Oiartzun, Spain", "Arraia-Maeztu, Spain", 
-                      "Villoslada de Cameros, Spain", 
-                      "Monte Hacho, Spain", 
-                      "Gurugú y Parque Forestal de Rostrogordo, Spain" 
-                      )
 
 vector_comunidades <- c("Andalucía", 
                         "Aragón", 
@@ -113,12 +93,10 @@ vector_comunidades <- c("Andalucía",
                         )
                         
                         
-                        
-
-
+                      
 porcent = c()
-for (i in vector_relevante){
-  datos <- get_osm_data(vector_provincias[i])
+for (i in vector_provincias){
+  datos <- get_osm_data(i)
   green_index <- calculate_green_index(datos, 4326, 100)
   percentage <- calculate_percentage(green_index)
   porcent = c(porcent, percentage$percentage[3])
@@ -126,6 +104,7 @@ for (i in vector_relevante){
 DF<-data.frame(vector_provincias,porcent)
 DF
 
+write_csv(DF)
 ```
 
 
