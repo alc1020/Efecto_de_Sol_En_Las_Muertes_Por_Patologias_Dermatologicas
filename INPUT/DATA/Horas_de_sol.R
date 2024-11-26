@@ -38,7 +38,9 @@ datos <- Horas_de_sol %>%
       Provincia %in% c("Álava", "Vizcaya", "Guipúzcoa") ~ "País Vasco",
 
       TRUE ~ NA_character_
-    ))
+    ))%>%
+
+  filter(!is.na(Comunidad))
 
 print(datos)
   
