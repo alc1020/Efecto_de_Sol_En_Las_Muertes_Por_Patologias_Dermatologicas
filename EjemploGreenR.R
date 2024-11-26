@@ -57,9 +57,7 @@ vector_comunidades <- c("Andalucía",
                         "Murcia", 
                         "Navarra", 
                         "País Vasco", 
-                        "La Rioja",
-                        "Ceuta", 
-                        "Melilla"
+                        "La Rioja"
                         )
                         
                         
