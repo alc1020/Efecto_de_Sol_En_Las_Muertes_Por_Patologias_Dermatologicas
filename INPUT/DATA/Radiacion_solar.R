@@ -12,4 +12,3 @@ str(Radiacion_solar)
 summary(Radiacion_solar)
 view(Radiacion_solar)
 
-# Hacemos un dataframe con la media de los índices de radiación por provincia, agrupados por comunidad autónoma
