@@ -1,4 +1,4 @@
-Provincia;Horas de sol;HSP*
+Provincia;HorasDeSol;HSP*
 Almería;3.305;6.02
 Cádiz;3.316;6
 Córdoba;3.316;5.9
@@ -9,17 +9,17 @@ Málaga;3.248;5.82
 Sevilla;3.526;5.98
 Huesca;3.099;5.67
 Teruel;3.011;5.11
-Zaragoza;2.620;5.61
+Zaragoza;2.62;5.61
 Asturias;1.962;3.85
 Cantabria;1.639;3.97
 Barcelona;2.453;5.4
-Girona;2.800;4.12
+Girona;2.8;4.12
 Lleida;3.031;5.61
-Tarragona;2.620;5.59
+Tarragona;2.62;5.59
 Albacete;3.282;5.72
 Ciudad Real;3.295;5.76
 Cuenca;2.779;5.57
-Guadalajara;2.900;5.59
+Guadalajara;2.9;5.59
 Toledo;2.815;5.78
 Ávila;3.305;5.27
 Burgos;2.751;4.98
@@ -37,14 +37,14 @@ Valencia;2.808;5.73
 Badajoz;3.224;5.74
 Cáceres;3.365;5.7
 A Coruña;2.453;4.3
-Lugo;2.820;4.3
-Ourense;2.800;4.8
+Lugo;2.82;4.3
+Ourense;2.8;4.8
 Pontevedra;3.031;4.4
 Mallorca;3.098;5.3
 Menorca;2.981;5.3
 Tenerife;3.098;5.3
 Lanzarote;2.924;5.9
-La Palma;2.800;5.9
+La Palma;2.8;5.9
 La Rioja;2.708;4.54
 Murcia;3.348;5.7
 Pamplona;2.285;4.74

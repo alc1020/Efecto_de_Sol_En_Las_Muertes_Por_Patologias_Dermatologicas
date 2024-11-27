@@ -108,17 +108,169 @@ write_csv(DF)
 ```
 
 
-
 ![Índice de vegetación](INPUT/mapas/indice_vegetacion.png)
 **Figura 1:** Índice de vegetación
 
 
 ### 1.3 Variación meteorológica respectiva a radiación solar
 
-Datos relativos a la radiación ultravioleta desde AEMET, por su posible relación con la incidencia de mutaciones cutáneas cuando la piel está expuesta al sol en diferentes zonas de España.
+Datos csv proporcionados por la empresa especializada en energía MRWATT, relativos a la radiación solar, por su posible relación con la incidencia de mutaciones cutáneas cuando la piel está expuesta cierta intensidad de radiación solar en diferentes zonas de España.
+
+PASOS (A PARTIR DE AQUÍ ESTO LO PONDRÍA EN EL PUNTO 2)
+
+En primer lugar, descargamos las librerías readr y tidyverse que necesitaremos en la estructuración de los datos y su posterior manejo. El siguiente código se corresponde a la obtención, estructuración y visualización de los datos del archivo csv.
+
+```{Estructuración-datos-csv-radiación}
+library(readr)
+library(tidyverse)
+
+Radiacion_solar <- read_delim(file = "INPUT/DATA/Radiacion_solar csv.csv",
+                           delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+Radiacion_solar
+
+str(Radiacion_solar)
+summary(Radiacion_solar)
+view(Radiacion_solar)
+```
+
+
+Puesto que los datos se encuentran estipulados por provincias, y nosotros queremos que figuren por comunidad autónoma, tendremos que agrupar las provincias que pertenezcan a su respectiva comunidad autónoma, y hacer la media del índice de radiación solar de las mismas.
+
+Para ello, primeramente, hacemos uso de la función case_when para asignar la correspondiente comunidad autónoma a cada provincia. Si no existe ninguna coincidencia, aparecerá un valor nulo NA. Después, con mutate añadimos una nueva columna con las comunidades generadas. Puesto que Ceuta y Melilla son ciudades autónomas que no se van a incluir en el estudio, y por tanto figuran como NA, las descartamos con filter.
+
+```{Asignación-ccaa}
+datosrad <- Radiacion_solar %>%
+  mutate(
+    Comunidad = case_when(
+      
+      Localidad %in% c("ALMERIA", "CADIZ", "CORDOBA", "GRANADA", "HUELVA", "JAEN", "MALAGA", "SEVILLA") ~ "Andalucía",
+      Localidad %in% c("HUESCA", "ZARAGOZA", "TERUEL") ~ "Aragón",
+      Localidad %in% c("ASTURIAS") ~ "Asturias",
+      Localidad %in% c("CANTABRIA") ~ "Cantabria",
+      Localidad %in% c("TOLEDO", "CIUDAD REAL", "GUADALAJARA", "CUENCA", "ALBACETE") ~ "Castilla La Mancha",
+      Localidad %in% c("LEON", "ZAMORA", "SALAMANCA", "PALENCIA", "VALLADOLID", "AVILA", "BURGOS", "SORIA", "SEGOVIA") ~ "Castilla y León",
+      Localidad %in% c("LERIDA", "GERONA", "BARCELONA", "TARRAGONA") ~ "Cataluña",
+      Localidad %in% c("CASTELLON", "VALENCIA", "ALICANTE") ~ "Comunidad Valenciana",
+      Localidad %in% c("CACERES", "BADAJOZ") ~ "Extremadura",
+      Localidad %in% c("LUGO", "ORENSE", "PONTEVEDRA", "LA CORUÑA") ~ "Galicia",
+      Localidad %in% c("BALEARES") ~ "Islas Baleares",
+      Localidad %in% c("ST.C.TENERIFE", "LAS PALMAS") ~ "Islas Canarias",
+      Localidad %in% c("LA RIOJA") ~ "La Rioja",
+      Localidad %in% c("MADRID") ~ "Madrid",
+      Localidad %in% c("MURCIA") ~ "Murcia",
+      Localidad %in% c("NAVARRA") ~ "Navarra",
+      Localidad %in% c("ALAVA", "VIZCAYA", "GUIPUZCOA") ~ "País Vasco",
+      
+      TRUE ~ NA_character_
+    ))%>%
+  
+  filter(!is.na(Comunidad))
+```
+
+A continuación, hacemos la media de los índices anuales de radiación solar en unidades de KW/m2, agrupados por comunidades.
+
+```{Media-de-radiación}
+mediarad <- datosrad %>%
+  group_by(Comunidad) %>%
+  summarise(KW_por_m2 = mean(KW_por_m2))
+```
+
+Finalmente, creamos un dataframe con los datos resultantes que vamos a analizar, y creamos un gráfico de barras con el índice de radiación por comunidad.
+
+```{Df-radiación-y-gráfico}
+datos_radiacion_solar <- data.frame(
+  c(mediarad)
+)
+
+print(datos_radiacion_solar)
+
+ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
+  geom_bar(stat = "identity")
+```
+
 
 ![Índice de radiación solar](INPUT/mapas/indice_radiacion.png)
 **Figura 2:** Índice de radiación solar
+
+
+### 1.4 Número de horas de sol
+
+Datos csv proporcionados por la empresa de energía renovable y telefonía Roam, acerca del número de horas de sol del que dispone cada provincia en España. Posible relación de la incidencia prolongada del sol con el incremento de patologías en la piel.
+
+PASOS
+
+Primero, importamos las librerías correspondientes, estructuramos el csv y lo mostramos.
+
+```{Estructuración-datos-radiación}
+library(readr)
+library(tidyverse)
+
+Horas_de_sol <- read_delim(file = "INPUT/DATA/Horas_de_sol csv.csv",
+                               delim = ";", escape_double = FALSE, trim_ws = TRUE)
+Horas_de_sol
+
+str(Horas_de_sol)
+summary(Horas_de_sol)
+view(Horas_de_sol)
+```
+
+
+Seguidamente, asignamos a cada provincia su comunidad autónoma, creando una nueva columna.Aquellos nombres que no pertenezcan a ninguna comunidad aparecerán como nulos (NA). En este caso no hay ninguno, pero si lo hubiera, se eliminaría con filter.
+
+
+```{Asignación-por-ccaa}
+datos <- Horas_de_sol %>%
+  mutate(
+    Comunidad = case_when(
+      
+      Provincia %in% c("Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "Málaga", "Sevilla") ~ "Andalucía",
+      Provincia %in% c("Huesca", "Zaragoza", "Teruel") ~ "Aragón",
+      Provincia %in% c("Asturias") ~ "Asturias",
+      Provincia %in% c("Cantabria") ~ "Cantabria",
+      Provincia %in% c("Toledo", "Ciudad Real", "Guadalajara", "Cuenca", "Albacete") ~ "Castilla La Mancha",
+      Provincia %in% c("León", "Zamora", "Salamanca", "Palencia", "Valladolid", "Ávila", "Burgos", "Soria", "Segovia") ~ "Castilla y León",
+      Provincia %in% c("Lleida", "Girona", "Barcelona", "Tarragona") ~ "Cataluña",
+      Provincia %in% c("Castellón", "Valencia", "Alicante") ~ "Comunidad Valenciana",
+      Provincia %in% c("Cáceres", "Badajoz") ~ "Extremadura",
+      Provincia %in% c("Lugo", "Ourense", "Pontevedra", "A Coruña") ~ "Galicia",
+      Provincia %in% c("Menorca", "Mallorca") ~ "Islas Baleares",
+      Provincia %in% c("Tenerife", "La Palma", "Lanzarote") ~ "Islas Canarias",
+      Provincia %in% c("La Rioja") ~ "La Rioja",
+      Provincia %in% c("Madrid") ~ "Madrid",
+      Provincia %in% c("Murcia") ~ "Murcia",
+      Provincia %in% c("Pamplona") ~ "Navarra",
+      Provincia %in% c("Álava", "Vizcaya", "Guipúzcoa") ~ "País Vasco",
+
+      TRUE ~ NA_character_
+    ))%>%
+
+  filter(!is.na(Comunidad))
+```
+
+
+Mediante el uso de group_by y summarise, hacemos la media de las horas de sol de las provincias, agrupadas por comunidad autónoma.
+
+```{Agrupación}
+medias <- datos %>%
+  group_by(Comunidad) %>%
+  summarise(HorasDeSol = mean(HorasDeSol))
+
+print(medias)
+```
+
+
+Para terminar, visualizamos los datos finales en un dataframe y en un gráfico de barras.
+
+```{Visualización-datos-radiación-y-gráfica}
+datos_horas_de_sol <- data.frame(
+  c(medias)
+)
+
+ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
+  geom_bar(stat = "identity")
+```
+
 
 
 ## 2. Estructuración y manipulación de los datos
