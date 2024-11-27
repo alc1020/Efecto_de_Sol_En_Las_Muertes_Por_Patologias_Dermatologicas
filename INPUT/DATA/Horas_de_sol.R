@@ -45,7 +45,7 @@ datos <- Horas_de_sol %>%
 print(datos)
   
 
-#media de las horas de sol cuyas filas que tengan el mismo nombre de ccaa
+#media de las horas de sol cuyas filas tengan el mismo nombre de ccaa
 
 medias <- datos %>%
   group_by(Comunidad) %>%
@@ -62,3 +62,7 @@ datos_horas_de_sol <- data.frame(
 
 print(datos_horas_de_sol)
 
+
+# gráfico
+ggplot(data = datos_horas_de_sol, aes(x = Comunidad, y = HorasDeSol)) +
+  geom_bar(stat = "identity")

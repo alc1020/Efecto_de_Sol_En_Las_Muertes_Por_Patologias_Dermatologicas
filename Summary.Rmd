@@ -176,14 +176,17 @@ mediarad <- datosrad %>%
   summarise(KW_por_m2 = mean(KW_por_m2))
 ```
 
-Finalmente, creamos un dataframe con los datos resultantes que vamos a analizar.
+Finalmente, creamos un dataframe con los datos resultantes que vamos a analizar, y creamos un gráfico de barras con el índice de radiación por comunidad.
 
-```{Df-radiación}
+```{Df-radiación-y-gráfico}
 datos_radiacion_solar <- data.frame(
   c(mediarad)
 )
 
 print(datos_radiacion_solar)
+
+ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
+  geom_bar(stat = "identity")
 ```
 
 
@@ -214,6 +217,7 @@ view(Horas_de_sol)
 
 
 Seguidamente, asignamos a cada provincia su comunidad autónoma, creando una nueva columna.Aquellos nombres que no pertenezcan a ninguna comunidad aparecerán como nulos (NA). En este caso no hay ninguno, pero si lo hubiera, se eliminaría con filter.
+
 
 ```{Asignación-por-ccaa}
 datos <- Horas_de_sol %>%
@@ -256,12 +260,15 @@ print(medias)
 ```
 
 
-Para terminar, visualizamos los datos finales en un dataframe.
+Para terminar, visualizamos los datos finales en un dataframe y en un gráfico de barras.
 
-```{Visualización-datos-radiación}
+```{Visualización-datos-radiación-y-gráfica}
 datos_horas_de_sol <- data.frame(
   c(medias)
 )
+
+ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
+  geom_bar(stat = "identity")
 ```
 
 

@@ -57,3 +57,8 @@ datos_radiacion_solar <- data.frame(
 )
 
 print(datos_radiacion_solar)
+
+
+# gráfico de barras
+ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
+  geom_bar(stat = "identity")
