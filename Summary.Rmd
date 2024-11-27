@@ -43,6 +43,57 @@ Defunciones_2022 <- read_delim(file = "INPUT/DATA/defunciones_2022 csv.csv",
                                   delim = ";", escape_double = FALSE, trim_ws = TRUE)
 ```
 
+Antes de hacer cualquier tipo de merge, o join para unificar nuestros datos, tenemos que prepararlos para que sean compatibles los datos entre ellos. Para esto tendremos que cambiar de nombre la columna "Nombre" a "Comunidad".
+
+```{r}
+datos_defunciones_2022 <- Defunciones_2022 %>%
+  rename(Comunidad = Nombre)%>%
+  rename(Defunciones = Valor)
+```
+
+Hacemos lo mismo para los nombres de las comunidades autónomas necesarias:
+
+```{r}
+datos_defunciones_2022 <- datos_defunciones_2022 %>%
+  mutate(Comunidad = case_when(
+    Comunidad == "Asturias, Principado de" ~ "Asturias",
+    Comunidad == "Balears, Illes" ~ "Islas Baleares",
+    
+    Comunidad == "Canarias" ~ "Islas Canarias",
+    Comunidad == "Balears, Illes" ~ "Islas Baleares",
+    
+    Comunidad == "Castilla - La Mancha" ~ "Castilla La Mancha",
+    Comunidad == "Comunitat Valenciana" ~ "Comunidad Valenciana",
+
+    Comunidad == "Madrid, Comunidad de" ~ "Madrid",
+    Comunidad == "Murcia, Región de" ~ "Murcia",
+    
+    Comunidad == "Navarra, Comunidad Foral de" ~ "Navarra",
+    Comunidad == "Rioja, La" ~ "La Rioja",
+    
+    TRUE ~ Comunidad
+))
+```
+
+Además, usaremos el TRUE ~ Comunidad en caso de que si no fuera necesario, los valores no se cambien.
+
+
+Finalmente, eliminamos "Ceuta" y "Melilla", no por discriminar, sino porque no se ha encontrado datos relevantes en otro de los ámbitos estudiados y por tanto quedan excluidos actualmente. Procedemos a organizar los datos después del cambio alfabéticamente.
+
+
+```{r}
+datos_defunciones_2022 <- datos_defunciones_2022 %>%
+  filter(!Comunidad %in% c("Ceuta", "Melilla")) %>%
+  arrange(Comunidad)
+```
+
+Haremos un dataframe, y posteriormente crearemos un gráfico.
+
+```{r}
+datos_def_dataframe <- data.frame(datos_defunciones_2022)
+```
+
+
 
 ### 1.2 Zonas verdes distribuidas por comunidades autónomas
 Usando greenR obtenemos datos relevantes a la distribución de zonas verdes del país. Así, accedemos a una serie de ubicaciones representativas de cada provincia, con estos valores realizamos una media para obtener una representación apropiada para cada comunidad autónoma. 

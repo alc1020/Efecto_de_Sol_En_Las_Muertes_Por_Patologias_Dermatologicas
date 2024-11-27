@@ -60,6 +60,11 @@ datos_defunciones_2022 <- datos_defunciones_2022 %>%
 view(datos_defunciones_2022)
 
 
+datos_def_dataframe <- data.frame(datos_defunciones_2022)
+
+
+ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
+  geom_bar(stat = "identity")
 
 # Crear un nuevo data frame combinando ambas tablas por la columna 'Comunidad'
 datos_combinados <- merge(datos_horas_de_sol, datos_defunciones_2022, by = "Comunidad")
