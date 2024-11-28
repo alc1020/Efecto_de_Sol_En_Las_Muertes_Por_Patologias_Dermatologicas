@@ -1,5 +1,6 @@
 library(readr)
 library(dplyr)
+library(ggplot2)
 Defunciones_2022 <- read_delim(file = "INPUT/DATA/defunciones_2022 csv.csv",
                                   delim = ";", escape_double = FALSE, trim_ws = TRUE)
 #print(Defunciones_2022)
@@ -36,7 +37,7 @@ datos_defunciones_2022 <- datos_defunciones_2022 %>%
     Comunidad == "Balears, Illes" ~ "Islas Baleares",
     
     Comunidad == "Canarias" ~ "Islas Canarias",
-    Comunidad == "Balears, Illes" ~ "Islas Baleares",
+    #Comunidad == "Balears, Illes" ~ "Islas Baleares",
     
     Comunidad == "Castilla - La Mancha" ~ "Castilla La Mancha",
     Comunidad == "Comunitat Valenciana" ~ "Comunidad Valenciana",
@@ -63,12 +64,16 @@ view(datos_defunciones_2022)
 datos_def_dataframe <- data.frame(datos_defunciones_2022)
 
 
-ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
-  geom_bar(stat = "identity")
+grafico_def <- ggplot(datos_defunciones_2022)
+
+
 
 # Crear un nuevo data frame combinando ambas tablas por la columna 'Comunidad'
-datos_combinados <- merge(datos_horas_de_sol, datos_defunciones_2022, by = "Comunidad")
-datos_combinados <- merge(datos_combinados, datos_radiacion_solar, by = "Comunidad")
+datos_combinados_horas_def <- merge(datos_horas_de_sol, datos_defunciones_2022, by = "Comunidad")
+
+datos_combinados_rad_def <- merge(datos_radicacion_solar, datos_defunciones_2022, by = "Comunidad")
+
+datos_combinados_horas_rad_def <- merge(datos_combinados, datos_radiacion_solar, by = "Comunidad")
 
 # Ver el resultado
 view(datos_combinados)

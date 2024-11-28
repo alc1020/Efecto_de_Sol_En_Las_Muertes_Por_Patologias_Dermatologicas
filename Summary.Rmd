@@ -60,7 +60,6 @@ datos_defunciones_2022 <- datos_defunciones_2022 %>%
     Comunidad == "Balears, Illes" ~ "Islas Baleares",
     
     Comunidad == "Canarias" ~ "Islas Canarias",
-    Comunidad == "Balears, Illes" ~ "Islas Baleares",
     
     Comunidad == "Castilla - La Mancha" ~ "Castilla La Mancha",
     Comunidad == "Comunitat Valenciana" ~ "Comunidad Valenciana",
