@@ -63,10 +63,7 @@ datos_defunciones_2022 <- datos_defunciones_2022 %>%
 
 datos_def_dataframe <- data.frame(datos_defunciones_2022)
 
-#datos_defunciones_2022
 
-
-# Crear el datos_defunciones_2022
 grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = reorder(Comunidad, -Defunciones), y = Defunciones)) +
   geom_bar(stat = "identity", fill = "blue") +
   labs(
@@ -78,25 +75,3 @@ grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = reorder(Comunida
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 grafico_defunciones_2022
-
-# Crear un nuevo data frame combinando ambas tablas por la columna 'Comunidad'
-datos_combinados_horas_def <- merge(datos_horas_de_sol, datos_defunciones_2022, by = "Comunidad")
-
-datos_combinados_rad_def <- merge(datos_radicacion_solar, datos_defunciones_2022, by = "Comunidad")
-
-datos_combinados_horas_rad_def <- merge(datos_combinados_horas_def, datos_radiacion_solar, by = "Comunidad")
-
-# Ver el resultado
-#view(datos_combinados)
-datos_combinados_horas_def
-datos_combinados_rad_def
-datos_combinados_horas_rad_def
-
-# Unir las tablas por la columna 'Comunidad'
-#datos_def_media <- datos_horas_de_sol %>%
- # inner_join(datos_radiacion_solar, by = "Comunidad")
-
-# Ver el resultado
-#view(datos_combinados)
-
-

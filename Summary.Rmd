@@ -1,6 +1,6 @@
 
 ---
-title: "Efectos de factores ambientales y climatologicos en el desarrollo de patologías dermatológicas en España"
+title: "Efectos del sol en la tasa de muertes por causa de patologías dermatológicas en España"
 author: "Carmen Ruiz Alonso, Anna Lázaro Caminero y Silvia Tobes García"
 date: "Curso 2024/25"
 output:
@@ -10,8 +10,6 @@ output:
       collapsed: true
       smooth_scroll: true
 ---
-
-# Repositorio
 
 Url del repositorio: https://github.com/alc1020/SEMINARIO_FUENTES \
 
@@ -32,13 +30,11 @@ Anna Lázaro Caminero: alc1020@alu.ubu.es \
 
 
 
-# 1. Resumen
+# 1. Introducción
 
-Durante la resolución de este seminario se pretenderá establecer una relación entre los efectos de los rayos ultravioleta, las horas de luz en el día y las zonas verdes en la obtención de cualquier patología dermatológica a nivel nacional.
+Durante la resolución de este seminario se pretenderá establecer una relación entre los efectos de los rayos ultravioleta, y las horas de luz en el día y en la muerte causada por cualquier enfermedad de piel a nivel nacional.
 
-# Nose que hacer con esto Introducción
-
-Las patologías a nivel dermatológico son un problema.
+Para ello, accederemos a datos relevantes, y los manipularemos para obtener herramientas en el análisis de dicho objetivo. Realizaremos el análisis en R studio, utilizando las bibliotecas/paquetes necesarios en cada momento.
 
 # 2. Objetivo
 
@@ -48,9 +44,11 @@ Defender la integridad de nuestro trabajo de Antonio Jesús Canepa (https://gith
 
 Hemos accedido a distintas fuentes de datos para recopilar información acerca de las horas de sol en España por provincias, así como el índice de radiación UV, las áreas verdes y el número de muertes por causa de patologías de piel.
 
-## 3.1 Búsqueda de datos. Mapas
+## 3.1 Búsqueda de datos
 
-### 3.1.1 Índice anual de enfermedades de piel y subcutáneas por comunidades autónomas
+Comentamos de dónde hemos sacado los datos, y como accedemos a ellos en R studio.
+
+### 3.1.1 Índice anual de muertes por enfermedades de piel por comunidades autónomas
 Datos proporcionados por el Instituto Nacional de Estadística que nos indican la cantidad de personas que fallecen debido a patologías cutáneas y subcutáneas anualmente. Están disponibles los datos desde el año 2010 al año 2022.
 
 Para un manejo más eficiente, sólo utilizaremos las del año 2022 en conjunto con los datos aportados por AEMET.
@@ -62,75 +60,7 @@ Defunciones_2022 <- read_delim(file = "INPUT/DATA/defunciones_2022 csv.csv",
 ```
 
 
-### 3.1.2 Zonas verdes distribuidas por comunidades autónomas
-Usando greenR obtenemos datos relevantes a la distribución de zonas verdes del país. Así, accedemos a una serie de ubicaciones representativas de cada provincia, con estos valores realizamos una media para obtener una representación apropiada para cada comunidad autónoma. 
-
-```{r Zonas-Verdes-CCAA, eval=FALSE, include=FALSE}
-library(greenR)
-
-vector_provincias <- c("Huelva, Spain", "Sevilla, Spain", "Cordoba, Spain", "Jaen, Spain", "Cadiz, Spain", "Malaga, Spain", "Granada, Spain", "Almeria, Spain", 
-                       "Huesca, Spain", "Zaragoza, Spain", "Teruel, Spain", 
-                       "Asturias, Spain",
-                       "Mallorca, Spain", "Menorca, Spain", 
-                       "El hierro, Spain", "Gran Canaria, Spain", "La Gomera, Spain", "La Palma, Spain", "Tenerife, Spain", 
-                       "Cantabria, Spain", 
-                       "Leon, Spain", "Palencia, Spain", "Burgos, Spain", "Soria, Spain", "Zamora, Spain", "Valladolid, Spain", "Segovia, Spain", "Salamanca, Spain", "Avila, Spain", 
-                       "Guadalajara, Spain", "Cuenca, Spain", "Albacete, Spain", "Toledo, Spain", "Ciudad Real, Spain",
-                       "Gerona, Spain", "Barcelona, Spain", "Lerida, Spain", "Tarragona, Spain", 
-                       "Castellon, Spain", "Valencia, Spain","Alicante, Spain", 
-                       "Caceres, Spain", "Badajoz, Spain", 
-                       "La Coruña, Spain", "Lugo, Spain", "Pontevedra, Spain", "Orense, Spain",
-                       "Madrid, Spain", 
-                       "Murcia, Spain",
-                       "Navarra, Spain", 
-                       "Vizcaya, Spain", "Guipuzcoa, Spain", "Alava, Spain", 
-                       "La Rioja, Spain",
-                       "Ceuta, Spain", 
-                       "Melilla, Spain" 
-                       )
-
-vector_comunidades <- c("Andalucía", 
-                        "Aragón", 
-                        "Asturias", 
-                        "Islas Baleares", 
-                        "Islas Canarias", 
-                        "Cantabria", 
-                        "Castilla y León", 
-                        "Castilla La Mancha", 
-                        "Cataluña", 
-                        "Comunidad Valenciana", 
-                        "Extremadura",
-                        "Galicia",
-                        "Madrid",
-                        "Murcia", 
-                        "Navarra", 
-                        "Pais Vasco", 
-                        "La Rioja",
-                        "Ceuta", 
-                        "Melilla"
-                        )
-                        
-                        
-                      
-porcent = c()
-for (i in vector_provincias){
-  datos <- get_osm_data(i)
-  green_index <- calculate_green_index(datos, 4326, 100)
-  percentage <- calculate_percentage(green_index)
-  porcent = c(porcent, percentage$percentage[3])
-}
-DF<-data.frame(vector_provincias,porcent)
-DF
-
-write_csv(DF)
-```
-
-
-![Índice de vegetación](INPUT/mapas/indice_vegetacion.png)
-**Figura 1:** Índice de vegetación
-
-
-### 3.1.3 Variación meteorológica respectiva a radiación solar
+### 3.1.2 Variación meteorológica respectiva a radiación solar
 
 Datos csv proporcionados por la empresa especializada en energía MRWATT, relativos a la radiación solar, por su posible relación con la incidencia de mutaciones cutáneas cuando la piel está expuesta cierta intensidad de radiación solar en diferentes zonas de España.
 
@@ -158,7 +88,7 @@ view(Radiacion_solar)
 **Figura 2:** Índice de radiación solar
 
 
-### 3.1.4 Número de horas de sol
+### 3.1.3 Número de horas de sol
 
 Datos csv proporcionados por la empresa de energía renovable y telefonía Roam, acerca del número de horas de sol del que dispone cada provincia en España. Posible relación de la incidencia prolongada del sol con el incremento de patologías en la piel.
 
@@ -190,8 +120,6 @@ Después de haber cargado los datos, tenemos que pasarlos a formatos que podamos
 
 
 ### 3.2.1 Datos Defunciones 
-
-
 
 Antes de hacer cualquier tipo de merge, o join para unificar nuestros datos, tenemos que prepararlos para que sean compatibles los datos entre ellos. Para esto tendremos que cambiar de nombre la columna "Nombre" a "Comunidad".
 
@@ -245,7 +173,23 @@ Haremos un dataframe, y posteriormente crearemos un gráfico.
 
 ```{r}
 datos_def_dataframe <- data.frame(datos_defunciones_2022)
+
+
+
+library(ggplot2)
+grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = Comunidad, y = Defunciones)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  labs(
+    title = "Muertes por Comunidad Autónoma en el 2022",
+    x = "Comunidad Autónoma",
+    y = "Número de Muertes"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+grafico_defunciones_2022
 ```
+
 
 ### 3.2.2 Datos Radiación Solar
 Puesto que los datos se encuentran estipulados por provincias, y nosotros queremos que figuren por comunidad autónoma, tendremos que agrupar las provincias que pertenezcan a su respectiva comunidad autónoma, y hacer la media del índice de radiación solar de las mismas.
@@ -389,25 +333,55 @@ grafico_horas_de_sol
 
 # 4. Análisis de los resultados
 
-## 4.1 Gráficos
 Visualizamos los datos obtenidos, en nuestro caso hemos optado por el uso de gráficas como medio de expresión.
+
+## 4.1 Comparación defunciones y horas de sol
+
+Para la comparación de defunciones y horas de sol, hemos optado por multiplicar las horas de sol por 100, con la finalidad de poder ver mejor la proporción entre muertes y horas de sol.
+
+Usamos merge() para juntar las tablas de los datos que necesitamos, usando como lazo común la columna "Comunidad".Después, usamos pivot_longer para poder conseguir dos filas por cada comunidad, una con el valor de las horas de sol, y otra con las defunciones. 
+
+Por último usamos ggplot para crear el gráfico.
 
 ```{r}
 library(ggplot2)
-grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = Comunidad, y = Defunciones)) +
-  geom_bar(stat = "identity", fill = "blue") +
-  labs(
-    title = "Muertes por Comunidad Autónoma en el 2022",
-    x = "Comunidad Autónoma",
-    y = "Número de Muertes"
-  ) +
+datos_defunciones_2022
+datos_horas_de_sol
+
+datos_horas_de_sol$HorasDeSol <- datos_horas_de_sol$HorasDeSol*100 
+
+datos_horas_sol_def <- merge(datos_defunciones_2022, datos_horas_de_sol, by = "Comunidad")
+datos_horas_sol_def
+ 
+
+datos_horas_sol_def_largo <- datos_horas_sol_def %>%
+  pivot_longer(cols = c(Defunciones, HorasDeSol), 
+               names_to = "Variable", 
+               values_to = "Valor")
+
+
+grafico_horas_sol_def <- ggplot(datos_horas_sol_def_largo, aes(x = Comunidad, y = Valor, fill = Variable)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Defunciones y Horas de Sol por Comunidad",
+       x = "Comunidad",
+       y = "Valores",
+       fill = "Variable") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 
-grafico_defunciones_2022
+grafico_horas_sol_def
 ```
+ 
+Para considerar que estén relacionados, a medida de que crezca el número de muertes tendría que aumentar simultáneamente el valor de horas de sol. 
 
-
+Como podemos observar, esto no ocurre en el gráfico. En principio, diríamos que no tienen relacón causal.
 
 
 # 5. Conculsión
+
+Si nos basamos únicamente en la correlación entre defunciones y horas de sol, concluimos que no hay relación.
+
+Si nos basamos únicamente en la correlación entre defunciones y índice de radiación, concluimos que .
+
+
+Teniendo todo en cuenta, concluimos que .
