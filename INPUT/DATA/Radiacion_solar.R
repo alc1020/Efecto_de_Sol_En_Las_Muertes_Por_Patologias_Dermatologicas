@@ -64,46 +64,77 @@ ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
   geom_bar(stat = "identity")
 
 
+################################################################################
 
 
-# vamos a crear un mapa con los datos obtenidos de radiación solar en España
+# vamos a crear un mapa con los datos obtenidos de radiación solar en España 
+#información obtenida de rpubs by rstudio
 
-install.packages(c("sf", "ggplot2", "dplyr"))
+# para manipular dataframes
+library(tidyverse)
+
+install.packages("sf")
 library(sf)
-library(ggplot2)
-library(dplyr)
 
-install.packages("devtools")
-library(devtools)
-install.packages("rnaturalearth")
-library(rnaturalearth)
-library(rnaturalearthdata)
+# Cargar el shapefile
+shapefile_path <- "INPUT/DATA/ComunidadesAutonomas_ETRS89_30N/Comunidades_Autonomas_ETRS89_30N"
+comunidades <- st_read(shapefile_path)
 
-# Descargar shapefile de España
-spain_map <- ne_states(country = "Spain", returnclass = "sf")
+# Verifica los datos cargados
+print(comunidades)
+
+##################
 
 
-
-# Supongamos que el dataframe `datos_radiacion_solar` tiene las columnas:
-# - "comunidad" con los nombres de las comunidades autónomas
-# - "radiacion" con los valores de radiación solar
-
-# Verifica los nombres
-unique(spain_map$name) # Nombres en el shapefile
-unique(datos_radiacion_solar$comunidad) # Nombres en el dataframe
+# Para transformar los archivos shapefiles 
+library(broom)
 
 
-# Une los datos con el shapefile
-mapa_datos <- spain_map %>%
-  left_join(datos_radiacion_solar, by = c("name" = "comunidad"))
+setwd("INPUT/DATA/ComunidadesAutonomas_ETRS89_30N")
+
+# Guardamos el archivo shapefile
+shapefile_ccaa <- readOGR("Comunidades_Autonomas_ETRS89_30N.shp")
+## OGR data source with driver: ESRI Shapefile 
+## Source: "C:\Users\Usuario\Desktop\r_que_r\r_que_r\content\datasets\ComunidadesAutonomas_ETRS89_30N\Comunidades_Autonomas_ETRS89_30N.shp", layer: "Comunidades_Autonomas_ETRS89_30N"
+## with 19 features
+## It has 3 fields
+
+# Para convertir el archivo shapefile en un dataframe utilizamos la función tidy()
+data_ccaa <- tidy(shapefile_ccaa)
+
+# primeras observaciones del dataset
+head(data_ccaa)
 
 
-ggplot(data = mapa_datos) +
-  geom_sf(aes(fill = KW_por_m2), color = "white") +
-  scale_fill_viridis_c(option = "C", name = "Radiación Solar") +
+nombres_ccaa <- data.frame(shapefile_ccaa$Texto)
+
+head(nombres_ccaa)
+
+nombres_ccaa$id <- as.character(seq(0, nrow(nombres_ccaa)-1))
+
+head(nombres_ccaa)
+
+data_ccaa_mapa <- left_join(data_ccaa, nombres_ccaa, by = "id")
+
+head(data_ccaa_mapa)
+
+data_ccaa_mapa %>%
+  ggplot() +
+  geom_polygon(aes( x= long, y = lat, group = group),
+               fill = "violetred4",
+               color = "white") +
   theme_minimal() +
-  labs(
-    title = "Radiación Solar en España por Comunidad Autónoma",
-    subtitle = "Datos de radiación solar",
-    caption = "Fuente: datos_radiacion_solar"
-  )
+  theme(
+    axis.line = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    axis.ticks = element_blank(),
+    panel.background = element_rect(colour= "darkgrey", size= 0.5)) +
+  ggtitle("Comunidades Autónomas Españolas")
+
+
+
+
+
+
+
