@@ -45,7 +45,8 @@ Defunciones_2022 <- read_delim(file = "INPUT/DATA/defunciones_2022 csv.csv",
 
 Antes de hacer cualquier tipo de merge, o join para unificar nuestros datos, tenemos que prepararlos para que sean compatibles los datos entre ellos. Para esto tendremos que cambiar de nombre la columna "Nombre" a "Comunidad".
 
-```{r Cambio-de-nombre}
+```{r Cambio-de-nombre-de-columnas}
+library(dplyr)
 datos_defunciones_2022 <- Defunciones_2022 %>%
   rename(Comunidad = Nombre)%>%
     rename(Defunciones = Valor)
@@ -54,7 +55,8 @@ datos_defunciones_2022 <- Defunciones_2022 %>%
 
 Hacemos lo mismo para los nombres de las comunidades autónomas necesarias:
 
-```{r}
+```{r Cambio-de-nombre-de-comunidades}
+library(dplyr)
 datos_defunciones_2022 <- datos_defunciones_2022 %>%
   mutate(Comunidad = case_when(
     Comunidad == "Asturias, Principado de" ~ "Asturias",
@@ -82,6 +84,7 @@ Finalmente, eliminamos "Ceuta" y "Melilla", no por discriminar, sino porque no s
 
 
 ```{r}
+library(dplyr)
 datos_defunciones_2022 <- datos_defunciones_2022 %>%
   filter(!Comunidad %in% c("Ceuta", "Melilla")) %>%
   arrange(Comunidad)
@@ -98,7 +101,7 @@ datos_def_dataframe <- data.frame(datos_defunciones_2022)
 ### 1.2 Zonas verdes distribuidas por comunidades autónomas
 Usando greenR obtenemos datos relevantes a la distribución de zonas verdes del país. Así, accedemos a una serie de ubicaciones representativas de cada provincia, con estos valores realizamos una media para obtener una representación apropiada para cada comunidad autónoma. 
 
-```{r Zonas-Verdes-CCAA}
+```{r Zonas-Verdes-CCAA, eval=FALSE, include=FALSE}
 library(greenR)
 
 vector_provincias <- c("Huelva, Spain", "Sevilla, Spain", "Cordoba, Spain", "Jaen, Spain", "Cadiz, Spain", "Malaga, Spain", "Granada, Spain", "Almeria, Spain", 
@@ -330,6 +333,7 @@ ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
 ## 3. Análisis de datos
 
 ```{r}
+library(ggplot2)
 grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = reorder(Comunidad, -Defunciones), y = Defunciones)) +
   geom_bar(stat = "identity", fill = "blue") +
   labs(
