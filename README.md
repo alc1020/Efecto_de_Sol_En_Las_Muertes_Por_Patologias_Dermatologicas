@@ -7,6 +7,7 @@ Anna Lázaro Caminero: alc1020@alu.ubu.es
 Introducción
 
 Objetivo general (sólo uno)
+Análisis 
 
 Métodos/resultados (respuesta a las preguntas de objetivos específicos)
 
