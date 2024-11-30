@@ -48,7 +48,7 @@ Antes de hacer cualquier tipo de merge, o join para unificar nuestros datos, ten
 ```{r Cambio-de-nombre}
 datos_defunciones_2022 <- Defunciones_2022 %>%
   rename(Comunidad = Nombre)%>%
-    rename(Defunciones = Valor)
+  rename(Defunciones = Valor)
 
 ```
 
