@@ -1,38 +1,56 @@
+
 ---
 title: "Efectos de factores ambientales y climatologicos en el desarrollo de patologías dermatológicas en España"
 author: "Carmen Ruiz Alonso, Anna Lázaro Caminero y Silvia Tobes García"
 date: "Curso 2024/25"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
 ---
-
-# Índice de contenidos
-
-
 
 # Repositorio
 
-Url del repositorio: https://github.com/alc1020/SEMINARIO_FUENTES 
-Participantes: cra1009@alu.ubu.es , stg1004@alu.ubu.es y alc1020@alu.ubu.es
+Url del repositorio: https://github.com/alc1020/SEMINARIO_FUENTES \
 
-#Resumen
+Integrantes: \
+Carmen Ruiz Alonso: cra1009@alu.ubu.es \
+Silvia Tobes García: stg1004@alu.ubu.es \
+Anna Lázaro Caminero: alc1020@alu.ubu.es \
+
+# Índice de contenidos
+1. Resumen \
+2. Objetivo \
+3. Metodología \
+3.1 Búsqueda de datos \
+3.2 Estructuración de datos \
+4. Análisis de resultados \
+5. Conclusión
+
+
+
+
+# 1. Resumen
 
 Durante la resolución de este seminario se pretenderá establecer una relación entre los efectos de los rayos ultravioleta, las horas de luz en el día y las zonas verdes en la obtención de cualquier patología dermatológica a nivel nacional.
 
-# Introducción
+# Nose que hacer con esto Introducción
 
 Las patologías a nivel dermatológico son un problema.
 
-# Objetivo
+# 2. Objetivo
 
-Los objetivos lo tendremos cuando hagamos el seminario.
+Defender la integridad de nuestro trabajo de Antonio Jesús Canepa (https://github.com/ajcanepa).
 
-# Metodología
+# 3. Metodología
 
 Hemos accedido a distintas fuentes de datos para recopilar información acerca de las horas de sol en España por provincias, así como el índice de radiación UV, las áreas verdes y el número de muertes por causa de patologías de piel.
 
-## 1. Búsqueda de datos. Mapas
+## 3.1 Búsqueda de datos. Mapas
 
-### 1.1 Índice anual de enfermedades de piel y subcutáneas por comunidades autónomas
+### 3.1.1 Índice anual de enfermedades de piel y subcutáneas por comunidades autónomas
 Datos proporcionados por el Instituto Nacional de Estadística que nos indican la cantidad de personas que fallecen debido a patologías cutáneas y subcutáneas anualmente. Están disponibles los datos desde el año 2010 al año 2022.
 
 Para un manejo más eficiente, sólo utilizaremos las del año 2022 en conjunto con los datos aportados por AEMET.
@@ -43,62 +61,8 @@ Defunciones_2022 <- read_delim(file = "INPUT/DATA/defunciones_2022 csv.csv",
                                   delim = ";", escape_double = FALSE, trim_ws = TRUE)
 ```
 
-Antes de hacer cualquier tipo de merge, o join para unificar nuestros datos, tenemos que prepararlos para que sean compatibles los datos entre ellos. Para esto tendremos que cambiar de nombre la columna "Nombre" a "Comunidad".
 
-```{r Cambio-de-nombre-de-columnas}
-library(dplyr)
-datos_defunciones_2022 <- Defunciones_2022 %>%
-  rename(Comunidad = Nombre)%>%
-    rename(Defunciones = Valor)
-
-```
-
-Hacemos lo mismo para los nombres de las comunidades autónomas necesarias:
-
-```{r Cambio-de-nombre-de-comunidades}
-library(dplyr)
-datos_defunciones_2022 <- datos_defunciones_2022 %>%
-  mutate(Comunidad = case_when(
-    Comunidad == "Asturias, Principado de" ~ "Asturias",
-    Comunidad == "Balears, Illes" ~ "Islas Baleares",
-    
-    Comunidad == "Canarias" ~ "Islas Canarias",
-    
-    Comunidad == "Castilla - La Mancha" ~ "Castilla La Mancha",
-    Comunidad == "Comunitat Valenciana" ~ "Comunidad Valenciana",
-
-    Comunidad == "Madrid, Comunidad de" ~ "Madrid",
-    Comunidad == "Murcia, Región de" ~ "Murcia",
-    
-    Comunidad == "Navarra, Comunidad Foral de" ~ "Navarra",
-    Comunidad == "Rioja, La" ~ "La Rioja",
-    
-    TRUE ~ Comunidad
-))
-```
-
-Además, usaremos el TRUE ~ Comunidad en caso de que si no fuera necesario, los valores no se cambien.
-
-
-Finalmente, eliminamos "Ceuta" y "Melilla", no por discriminar, sino porque no se ha encontrado datos relevantes en otro de los ámbitos estudiados y por tanto quedan excluidos actualmente. Procedemos a organizar los datos después del cambio alfabéticamente.
-
-
-```{r}
-library(dplyr)
-datos_defunciones_2022 <- datos_defunciones_2022 %>%
-  filter(!Comunidad %in% c("Ceuta", "Melilla")) %>%
-  arrange(Comunidad)
-```
-
-Haremos un dataframe, y posteriormente crearemos un gráfico.
-
-```{r}
-datos_def_dataframe <- data.frame(datos_defunciones_2022)
-```
-
-
-
-### 1.2 Zonas verdes distribuidas por comunidades autónomas
+### 3.1.2 Zonas verdes distribuidas por comunidades autónomas
 Usando greenR obtenemos datos relevantes a la distribución de zonas verdes del país. Así, accedemos a una serie de ubicaciones representativas de cada provincia, con estos valores realizamos una media para obtener una representación apropiada para cada comunidad autónoma. 
 
 ```{r Zonas-Verdes-CCAA, eval=FALSE, include=FALSE}
@@ -166,15 +130,14 @@ write_csv(DF)
 **Figura 1:** Índice de vegetación
 
 
-### 1.3 Variación meteorológica respectiva a radiación solar
+### 3.1.3 Variación meteorológica respectiva a radiación solar
 
 Datos csv proporcionados por la empresa especializada en energía MRWATT, relativos a la radiación solar, por su posible relación con la incidencia de mutaciones cutáneas cuando la piel está expuesta cierta intensidad de radiación solar en diferentes zonas de España.
 
-PASOS (A PARTIR DE AQUÍ ESTO LO PONDRÍA EN EL PUNTO 2)
 
 En primer lugar, descargamos las librerías readr y tidyverse que necesitaremos en la estructuración de los datos y su posterior manejo. El siguiente código se corresponde a la obtención, estructuración y visualización de los datos del archivo csv.
 
-```{Estructuración-datos-csv-radiación}
+```{r Estructuración-datos-csv-radiación}
 library(readr)
 library(tidyverse)
 
@@ -189,11 +152,107 @@ view(Radiacion_solar)
 ```
 
 
+
+
+![Índice de radiación solar](INPUT/mapas/indice_radiacion.png)
+**Figura 2:** Índice de radiación solar
+
+
+### 3.1.4 Número de horas de sol
+
+Datos csv proporcionados por la empresa de energía renovable y telefonía Roam, acerca del número de horas de sol del que dispone cada provincia en España. Posible relación de la incidencia prolongada del sol con el incremento de patologías en la piel.
+
+PASOS
+
+Primero, importamos las librerías correspondientes, estructuramos el csv y lo mostramos.
+
+```{r Estructuración-datos-radiación}
+library(readr)
+library(tidyverse)
+
+Horas_de_sol <- read_delim(file = "INPUT/DATA/Horas_de_sol csv.csv",
+                               delim = ";", escape_double = FALSE, trim_ws = TRUE)
+Horas_de_sol
+
+str(Horas_de_sol)
+summary(Horas_de_sol)
+view(Horas_de_sol)
+```
+
+
+
+
+
+## 3.2 Estructuración y manipulación de los datos
+
+Después de haber cargado los datos, tenemos que pasarlos a formatos que podamos utilizar para obtener gráficas, tablas adaptadas, etc.
+
+
+
+### 3.2.1 Datos Defunciones 
+
+
+
+Antes de hacer cualquier tipo de merge, o join para unificar nuestros datos, tenemos que prepararlos para que sean compatibles los datos entre ellos. Para esto tendremos que cambiar de nombre la columna "Nombre" a "Comunidad".
+
+
+```{r Cambio-de-nombre-de-columnas}
+library(dplyr)
+datos_defunciones_2022 <- Defunciones_2022 %>%
+  rename(Comunidad = Nombre)%>%
+    rename(Defunciones = Valor)
+
+```
+
+Hacemos lo mismo para los nombres de las comunidades autónomas necesarias:
+
+```{r Cambio-de-nombre-de-comunidades}
+library(dplyr)
+datos_defunciones_2022 <- datos_defunciones_2022 %>%
+  mutate(Comunidad = case_when(
+    Comunidad == "Asturias, Principado de" ~ "Asturias",
+    Comunidad == "Balears, Illes" ~ "Islas Baleares",
+    
+    Comunidad == "Canarias" ~ "Islas Canarias",
+    
+    Comunidad == "Castilla - La Mancha" ~ "Castilla La Mancha",
+    Comunidad == "Comunitat Valenciana" ~ "Comunidad Valenciana",
+
+    Comunidad == "Madrid, Comunidad de" ~ "Madrid",
+    Comunidad == "Murcia, Región de" ~ "Murcia",
+    
+    Comunidad == "Navarra, Comunidad Foral de" ~ "Navarra",
+    Comunidad == "Rioja, La" ~ "La Rioja",
+    
+    TRUE ~ Comunidad
+))
+```
+
+Además, usaremos el TRUE ~ Comunidad en caso de que si no fuera necesario, los valores no se cambien.
+
+
+Finalmente, eliminamos "Ceuta" y "Melilla", no por discriminar, sino porque no se ha encontrado datos relevantes en otro de los ámbitos estudiados y por tanto quedan excluidos actualmente. Procedemos a organizar los datos después del cambio alfabéticamente.
+
+
+```{r}
+library(dplyr)
+datos_defunciones_2022 <- datos_defunciones_2022 %>%
+  filter(!Comunidad %in% c("Ceuta", "Melilla")) %>%
+  arrange(Comunidad)
+```
+
+Haremos un dataframe, y posteriormente crearemos un gráfico.
+
+```{r}
+datos_def_dataframe <- data.frame(datos_defunciones_2022)
+```
+
+### 3.2.2 Datos Radiación Solar
 Puesto que los datos se encuentran estipulados por provincias, y nosotros queremos que figuren por comunidad autónoma, tendremos que agrupar las provincias que pertenezcan a su respectiva comunidad autónoma, y hacer la media del índice de radiación solar de las mismas.
 
 Para ello, primeramente, hacemos uso de la función case_when para asignar la correspondiente comunidad autónoma a cada provincia. Si no existe ninguna coincidencia, aparecerá un valor nulo NA. Después, con mutate añadimos una nueva columna con las comunidades generadas. Puesto que Ceuta y Melilla son ciudades autónomas que no se van a incluir en el estudio, y por tanto figuran como NA, las descartamos con filter.
 
-```{Asignación-ccaa}
+```{r Asignación-ccaa}
 datosrad <- Radiacion_solar %>%
   mutate(
     Comunidad = case_when(
@@ -224,7 +283,7 @@ datosrad <- Radiacion_solar %>%
 
 A continuación, hacemos la media de los índices anuales de radiación solar en unidades de KW/m2, agrupados por comunidades.
 
-```{Media-de-radiación}
+```{r Media-de-radiación}
 mediarad <- datosrad %>%
   group_by(Comunidad) %>%
   summarise(KW_por_m2 = mean(KW_por_m2))
@@ -232,48 +291,38 @@ mediarad <- datosrad %>%
 
 Finalmente, creamos un dataframe con los datos resultantes que vamos a analizar, y creamos un gráfico de barras con el índice de radiación por comunidad.
 
-```{Df-radiación-y-gráfico}
+```{r Df-radiación-y-gráfico}
 datos_radiacion_solar <- data.frame(
   c(mediarad)
 )
 
 print(datos_radiacion_solar)
 
-ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
-  geom_bar(stat = "identity")
+#ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
+ # geom_bar(stat = "identity")
+
+
+grafico_datos_radiacion_solar <- ggplot(data = datos_radiacion_solar, aes(x = Comunidad, 
+                                                                          y = KW_por_m2)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  labs(
+    title = "Datos Radicación solar",
+    x = "Comunidad Autónoma",
+    y = "Media Radiación Solar"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+grafico_datos_radiacion_solar
 ```
 
 
-![Índice de radiación solar](INPUT/mapas/indice_radiacion.png)
-**Figura 2:** Índice de radiación solar
-
-
-### 1.4 Número de horas de sol
-
-Datos csv proporcionados por la empresa de energía renovable y telefonía Roam, acerca del número de horas de sol del que dispone cada provincia en España. Posible relación de la incidencia prolongada del sol con el incremento de patologías en la piel.
-
-PASOS
-
-Primero, importamos las librerías correspondientes, estructuramos el csv y lo mostramos.
-
-```{Estructuración-datos-radiación}
-library(readr)
-library(tidyverse)
-
-Horas_de_sol <- read_delim(file = "INPUT/DATA/Horas_de_sol csv.csv",
-                               delim = ";", escape_double = FALSE, trim_ws = TRUE)
-Horas_de_sol
-
-str(Horas_de_sol)
-summary(Horas_de_sol)
-view(Horas_de_sol)
-```
-
+### 3.2.3 Datos Horas de Sol
 
 Seguidamente, asignamos a cada provincia su comunidad autónoma, creando una nueva columna.Aquellos nombres que no pertenezcan a ninguna comunidad aparecerán como nulos (NA). En este caso no hay ninguno, pero si lo hubiera, se eliminaría con filter.
 
 
-```{Asignación-por-ccaa}
+```{r Asignación-por-ccaa}
 datos <- Horas_de_sol %>%
   mutate(
     Comunidad = case_when(
@@ -305,7 +354,7 @@ datos <- Horas_de_sol %>%
 
 Mediante el uso de group_by y summarise, hacemos la media de las horas de sol de las provincias, agrupadas por comunidad autónoma.
 
-```{Agrupación}
+```{r Agrupación}
 medias <- datos %>%
   group_by(Comunidad) %>%
   summarise(HorasDeSol = mean(HorasDeSol))
@@ -316,25 +365,36 @@ print(medias)
 
 Para terminar, visualizamos los datos finales en un dataframe y en un gráfico de barras.
 
-```{Visualización-datos-radiación-y-gráfica}
+```{r Visualización-datos-radiación-y-gráfica}
 datos_horas_de_sol <- data.frame(
   c(medias)
 )
 
-ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
-  geom_bar(stat = "identity")
+#ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
+  #geom_bar(stat = "identity")
+
+grafico_horas_de_sol <- ggplot(data = datos_horas_de_sol, aes(x = Comunidad, y = HorasDeSol)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  labs(
+    title = "Horas de Sol por Comunidad Autónoma",
+    x = "Comunidad Autónoma",
+    y = "Horas de sol"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+grafico_horas_de_sol
 ```
 
 
+# 4. Análisis de los resultados
 
-## 2. Estructuración y manipulación de los datos
-
-
-## 3. Análisis de datos
+## 4.1 Gráficos
+Visualizamos los datos obtenidos, en nuestro caso hemos optado por el uso de gráficas como medio de expresión.
 
 ```{r}
 library(ggplot2)
-grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = reorder(Comunidad, -Defunciones), y = Defunciones)) +
+grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = Comunidad, y = Defunciones)) +
   geom_bar(stat = "identity", fill = "blue") +
   labs(
     title = "Muertes por Comunidad Autónoma en el 2022",
@@ -343,7 +403,11 @@ grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = reorder(Comunida
   ) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+grafico_defunciones_2022
 ```
 
 
-## 4. Comparación
+
+
+# 5. Conculsión
