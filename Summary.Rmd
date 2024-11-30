@@ -28,7 +28,7 @@ Los objetivos lo tendremos cuando hagamos el seminario.
 
 # Metodología
 
-Hemos accedido a distintas fuentes de datos para recopilar información acerca de las horas de sol en España por provincias, así como el índice de radiación UV, las áreas verdes y el número de muertes por cáncer de piel.
+Hemos accedido a distintas fuentes de datos para recopilar información acerca de las horas de sol en España por provincias, así como el índice de radiación UV, las áreas verdes y el número de muertes por causa de patologías de piel.
 
 ## 1. Búsqueda de datos. Mapas
 
@@ -45,10 +45,11 @@ Defunciones_2022 <- read_delim(file = "INPUT/DATA/defunciones_2022 csv.csv",
 
 Antes de hacer cualquier tipo de merge, o join para unificar nuestros datos, tenemos que prepararlos para que sean compatibles los datos entre ellos. Para esto tendremos que cambiar de nombre la columna "Nombre" a "Comunidad".
 
-```{r}
+```{r Cambio-de-nombre}
 datos_defunciones_2022 <- Defunciones_2022 %>%
   rename(Comunidad = Nombre)%>%
   rename(Defunciones = Valor)
+
 ```
 
 Hacemos lo mismo para los nombres de las comunidades autónomas necesarias:

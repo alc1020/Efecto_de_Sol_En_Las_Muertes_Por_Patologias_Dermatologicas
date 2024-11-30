@@ -64,5 +64,15 @@ print(datos_horas_de_sol)
 
 
 # gráfico
-ggplot(data = datos_horas_de_sol, aes(x = Comunidad, y = HorasDeSol)) +
-  geom_bar(stat = "identity")
+grafico_horas_de_sol <- ggplot(data = datos_horas_de_sol, aes(x = Comunidad, y = HorasDeSol)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  labs(
+    title = "Horas de Sol por Comunidad Autónoma",
+    x = "Comunidad Autónoma",
+    y = "Horas de sol"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+grafico_horas_de_sol
+
