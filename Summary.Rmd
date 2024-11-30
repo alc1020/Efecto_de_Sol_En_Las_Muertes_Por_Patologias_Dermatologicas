@@ -328,4 +328,17 @@ ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
 
 ## 3. Análisis de datos
 
+```{r}
+grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = reorder(Comunidad, -Defunciones), y = Defunciones)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  labs(
+    title = "Muertes por Comunidad Autónoma en el 2022",
+    x = "Comunidad Autónoma",
+    y = "Número de Muertes"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
 ## 4. Comparación

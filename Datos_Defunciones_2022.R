@@ -58,25 +58,36 @@ datos_defunciones_2022 <- datos_defunciones_2022 %>%
   filter(!Comunidad %in% c("Ceuta", "Melilla")) %>%
   arrange(Comunidad)
 
-view(datos_defunciones_2022)
+#view(datos_defunciones_2022)
 
 
 datos_def_dataframe <- data.frame(datos_defunciones_2022)
 
+#datos_defunciones_2022
 
-grafico_def <- ggplot(datos_defunciones_2022)
 
+# Crear el datos_defunciones_2022
+grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = reorder(Comunidad, -Defunciones), y = Defunciones)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  labs(
+    title = "Muertes por Comunidad Autónoma en el 2022",
+    x = "Comunidad Autónoma",
+    y = "Número de Muertes"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+grafico
 
 # Crear un nuevo data frame combinando ambas tablas por la columna 'Comunidad'
-datos_combinados_horas_def <- merge(datos_horas_de_sol, datos_defunciones_2022, by = "Comunidad")
+#datos_combinados_horas_def <- merge(datos_horas_de_sol, datos_defunciones_2022, by = "Comunidad")
 
-datos_combinados_rad_def <- merge(datos_radicacion_solar, datos_defunciones_2022, by = "Comunidad")
+#datos_combinados_rad_def <- merge(datos_radicacion_solar, datos_defunciones_2022, by = "Comunidad")
 
-datos_combinados_horas_rad_def <- merge(datos_combinados, datos_radiacion_solar, by = "Comunidad")
+#datos_combinados_horas_rad_def <- merge(datos_combinados, datos_radiacion_solar, by = "Comunidad")
 
 # Ver el resultado
-view(datos_combinados)
+#view(datos_combinados)
 
 
 
