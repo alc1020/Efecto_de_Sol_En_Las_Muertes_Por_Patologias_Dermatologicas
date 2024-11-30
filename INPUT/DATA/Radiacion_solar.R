@@ -62,3 +62,48 @@ print(datos_radiacion_solar)
 # gráfico de barras
 ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
   geom_bar(stat = "identity")
+
+
+
+
+# vamos a crear un mapa con los datos obtenidos de radiación solar en España
+
+install.packages(c("sf", "ggplot2", "dplyr"))
+library(sf)
+library(ggplot2)
+library(dplyr)
+
+install.packages("devtools")
+library(devtools)
+install.packages("rnaturalearth")
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+# Descargar shapefile de España
+spain_map <- ne_states(country = "Spain", returnclass = "sf")
+
+
+
+# Supongamos que el dataframe `datos_radiacion_solar` tiene las columnas:
+# - "comunidad" con los nombres de las comunidades autónomas
+# - "radiacion" con los valores de radiación solar
+
+# Verifica los nombres
+unique(spain_map$name) # Nombres en el shapefile
+unique(datos_radiacion_solar$comunidad) # Nombres en el dataframe
+
+
+# Une los datos con el shapefile
+mapa_datos <- spain_map %>%
+  left_join(datos_radiacion_solar, by = c("name" = "comunidad"))
+
+
+ggplot(data = mapa_datos) +
+  geom_sf(aes(fill = KW_por_m2), color = "white") +
+  scale_fill_viridis_c(option = "C", name = "Radiación Solar") +
+  theme_minimal() +
+  labs(
+    title = "Radiación Solar en España por Comunidad Autónoma",
+    subtitle = "Datos de radiación solar",
+    caption = "Fuente: datos_radiacion_solar"
+  )
