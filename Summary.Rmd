@@ -70,11 +70,13 @@ En primer lugar, descargamos las librerías readr y tidyverse que necesitaremos 
 ```{r Estructuración-datos-csv-radiación}
 library(readr)
 library(tidyverse)
+library(dplyr)
 
 Radiacion_solar <- read_delim(file = "INPUT/DATA/Radiacion_solar csv.csv",
                            delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-Radiacion_solar
+Radiacion_solar <- Radiacion_solar %>%
+  rename (radiacion_solar_KWm2 = KW_por_m2)
 
 str(Radiacion_solar)
 summary(Radiacion_solar)
@@ -230,7 +232,7 @@ A continuación, hacemos la media de los índices anuales de radiación solar en
 ```{r Media-de-radiación}
 mediarad <- datosrad %>%
   group_by(Comunidad) %>%
-  summarise(KW_por_m2 = mean(KW_por_m2))
+  summarise(radiacion_solar_KWm2 = mean(radiacion_solar_KWm2))
 ```
 
 Finalmente, creamos un dataframe con los datos resultantes que vamos a analizar, y creamos un gráfico de barras con el índice de radiación por comunidad.
@@ -247,7 +249,7 @@ print(datos_radiacion_solar)
 
 
 grafico_datos_radiacion_solar <- ggplot(data = datos_radiacion_solar, aes(x = Comunidad, 
-                                                                          y = KW_por_m2)) +
+                                                                          y = radiacion_solar_KWm2)) +
   geom_bar(stat = "identity", fill = "blue") +
   labs(
     title = "Datos Radicación solar",
@@ -377,7 +379,35 @@ Para considerar que estén relacionados, a medida de que crezca el número de mu
 Como podemos observar, esto no ocurre en el gráfico. En principio, diríamos que no tienen relación causal.
 
 ## 4.2 Comparación defunciones y radiación solar
+Para comparar las defunciones con la radiación solar, para que se vean mejor las gráficas se ha optado por dividir los datos de radiacion solar entre 10.
 
+Usamos de nuevo el metodo merge para unir ambos datos en una mmisma tabla y luego con ggplot2 observamos los datos con un gráfico de barras para poder sacar una conclusión.
+
+```{r}
+datos_radiacion_solar$radiacion_solar_KWm2 <- datos_radiacion_solar$radiacion_solar_KWm2 /10
+union_rad_def <- merge (datos_defunciones_2022, datos_radiacion_solar, by= "Comunidad")
+union_rad_def
+
+union_rad_def_largo <- union_rad_def %>%
+  pivot_longer(cols = c(Defunciones, radiacion_solar_KWm2), 
+               names_to = "Variable", 
+               values_to = "Valor")
+
+
+grafico_union_rad_def <- ggplot(datos_horas_sol_def_largo, aes(x = Comunidad, y = Valor, fill = Variable)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Defunciones y Radiación Solar",
+       x = "Comunidad",
+       y = "Valores",
+       fill = "Variable") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+grafico_union_rad_def
+```
+
+Deberíamos ver una relación proporcional, tal que, cuantas mas defunciones por cáncer de piel mas radiación debería haber.
+Pero, como podemos ver en el gráfico esta relación esperada no se ve.
 
 ## 4.3 Comparación defunciones, radiación y horas de luz
 
@@ -387,8 +417,6 @@ Partiendo de las comparaciones anteriores, aseguramos que los datos se encuentre
 
 ```{r Unión-datos}
 library(ggplot2)
-
-datos_radiacion_solar$RadiacionSolar <- datos_radiacion_solar$KW_por_m2 * 100
 
 datos_completo <- merge(datos_defunciones_2022, datos_horas_de_sol, by = "Comunidad")
 datos_completo <- merge(datos_completo, datos_radiacion_solar, by = "Comunidad")
@@ -400,7 +428,7 @@ En último lugar,configuramos correctamente la salida de los datos y creamos la 
 
 ```{r Graficación-datos-completos}
 datos_completo_largo <- datos_completo %>%
-  pivot_longer(cols = c(Defunciones, HorasDeSol, KW_por_m2), 
+  pivot_longer(cols = c(Defunciones, HorasDeSol, radiacion_solar_KWm2), 
                names_to = "Variable", 
                values_to = "Valor")
 
@@ -423,7 +451,7 @@ La cantidad de radiación y el número de defunciones parecen ser proporcionales
 
 Si nos basamos únicamente en la correlación entre defunciones y horas de sol, concluimos que no hay relación.
 
-Si nos basamos únicamente en la correlación entre defunciones y índice de radiación, concluimos que .
+Si nos basamos únicamente en la correlación entre defunciones y índice de radiación, concluimos que tampoco existe una relación clara entre las defunciones por causas dermatológicas y la radiación solar .
 
 
 Teniendo todo en cuenta, concluimos que .
