@@ -374,8 +374,50 @@ grafico_horas_sol_def
  
 Para considerar que estén relacionados, a medida de que crezca el número de muertes tendría que aumentar simultáneamente el valor de horas de sol. 
 
-Como podemos observar, esto no ocurre en el gráfico. En principio, diríamos que no tienen relacón causal.
+Como podemos observar, esto no ocurre en el gráfico. En principio, diríamos que no tienen relación causal.
 
+## 4.2 Comparación defunciones y radiación solar
+
+
+## 4.3 Comparación defunciones, radiación y horas de luz
+
+Para comparar los tres tipos de datos y graficarlos, hacemos uso de la librería ggplot2.
+
+Partiendo de las comparaciones anteriores, aseguramos que los datos se encuentren en la misma escala y los unimos con merge al conjunto de datos principal, por la clave Comunidad.
+
+```{r Unión-datos}
+library(ggplot2)
+
+datos_radiacion_solar$RadiacionSolar <- datos_radiacion_solar$KW_por_m2 * 100
+
+datos_completo <- merge(datos_defunciones_2022, datos_horas_de_sol, by = "Comunidad")
+datos_completo <- merge(datos_completo, datos_radiacion_solar, by = "Comunidad")
+
+datos_completo
+```
+
+En último lugar,configuramos correctamente la salida de los datos y creamos la gráfica con los tres tipos de datos para su posterior comparación.
+
+```{r Graficación-datos-completos}
+datos_completo_largo <- datos_completo %>%
+  pivot_longer(cols = c(Defunciones, HorasDeSol, KW_por_m2), 
+               names_to = "Variable", 
+               values_to = "Valor")
+
+grafico_completo <- ggplot(datos_completo_largo, aes(x = Comunidad, y = Valor, fill = Variable)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Defunciones, Horas de Sol y Radiación Solar por Comunidad",
+       x = "Comunidad",
+       y = "Valores",
+       fill = "Variable") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+grafico_completo
+```
+
+El análisis de resultados muestra que el índice de radiación solar guarda relación directa con el número de horas de sol. Sin embargo y como se ha comprobado en el punto 4.1, el número de horas de sol y las defunciones no parecen guardar correlación entre ellas.
+La cantidad de radiación y el número de defunciones parecen ser proporcionales en muchos casos, pero no podemos asegurar que exista una relación completamente fiable.
 
 # 5. Conculsión
 
@@ -385,3 +427,12 @@ Si nos basamos únicamente en la correlación entre defunciones y índice de rad
 
 
 Teniendo todo en cuenta, concluimos que .
+
+
+# 6. Referencias
+
+- Apuntes proporcionados por el profesor
+- r-charts.com
+- rpubs.com
+- ggplot2.tidyverse.org
+- opensciencelabs.org

@@ -59,82 +59,15 @@ datos_radiacion_solar <- data.frame(
 print(datos_radiacion_solar)
 
 
-# gráfico de barras
-ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
-  geom_bar(stat = "identity")
-
-
-################################################################################
-
-
-# vamos a crear un mapa con los datos obtenidos de radiación solar en España 
-#información obtenida de rpubs by rstudio
-
-# para manipular dataframes
-library(tidyverse)
-
-install.packages("sf")
-library(sf)
-
-# Cargar el shapefile
-shapefile_path <- "INPUT/DATA/ComunidadesAutonomas_ETRS89_30N/Comunidades_Autonomas_ETRS89_30N"
-comunidades <- st_read(shapefile_path)
-
-# Verifica los datos cargados
-print(comunidades)
-
-##################
-
-
-# Para transformar los archivos shapefiles 
-library(broom)
-
-
-setwd("INPUT/DATA/ComunidadesAutonomas_ETRS89_30N")
-
-# Guardamos el archivo shapefile
-shapefile_ccaa <- readOGR("Comunidades_Autonomas_ETRS89_30N.shp")
-## OGR data source with driver: ESRI Shapefile 
-## Source: "C:\Users\Usuario\Desktop\r_que_r\r_que_r\content\datasets\ComunidadesAutonomas_ETRS89_30N\Comunidades_Autonomas_ETRS89_30N.shp", layer: "Comunidades_Autonomas_ETRS89_30N"
-## with 19 features
-## It has 3 fields
-
-# Para convertir el archivo shapefile en un dataframe utilizamos la función tidy()
-data_ccaa <- tidy(shapefile_ccaa)
-
-# primeras observaciones del dataset
-head(data_ccaa)
-
-
-nombres_ccaa <- data.frame(shapefile_ccaa$Texto)
-
-head(nombres_ccaa)
-
-nombres_ccaa$id <- as.character(seq(0, nrow(nombres_ccaa)-1))
-
-head(nombres_ccaa)
-
-data_ccaa_mapa <- left_join(data_ccaa, nombres_ccaa, by = "id")
-
-head(data_ccaa_mapa)
-
-data_ccaa_mapa %>%
-  ggplot() +
-  geom_polygon(aes( x= long, y = lat, group = group),
-               fill = "violetred4",
-               color = "white") +
+# gráfico
+grafico_radiacion_solar <- ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  labs(
+    title = "Radiación solar por Comunidad Autónoma",
+    x = "Comunidad Autónoma",
+    y = "KW_por_m2"
+  ) +
   theme_minimal() +
-  theme(
-    axis.line = element_blank(),
-    axis.text = element_blank(),
-    axis.title = element_blank(),
-    axis.ticks = element_blank(),
-    panel.background = element_rect(colour= "darkgrey", size= 0.5)) +
-  ggtitle("Comunidades Autónomas Españolas")
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-
-
-
-
-
-
+grafico_radiacion_solar

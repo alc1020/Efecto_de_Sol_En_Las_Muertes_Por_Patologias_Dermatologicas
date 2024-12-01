@@ -19,3 +19,7 @@ Observar si existe una relación entre la tasa de defunciones por causa de enfer
 ## Referencias
 Instituto Nacional de Estadística: https://www.ine.es/jaxiT3/Datos.htm?t=49270
 Repositorios GitHub: https://github.com/ajcanepa/PRACTICA_TEMA5
+
+
+#Nube de palabras
+(Cuando acabemos el summary)
