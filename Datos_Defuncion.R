@@ -9,5 +9,3 @@ head(dato_pato)
 Datos_Patologia <- spread_all(dato_pato)
 
 view(Datos_Patologia)
-
-

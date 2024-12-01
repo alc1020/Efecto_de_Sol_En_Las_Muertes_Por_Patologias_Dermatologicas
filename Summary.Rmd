@@ -38,11 +38,11 @@ Para ello, accederemos a datos relevantes, y los manipularemos para obtener herr
 
 # 2. Objetivo
 
-Defender la integridad de nuestro trabajo de Antonio Jesús Canepa (https://github.com/ajcanepa).
+Defender la integridad de nuestro trabajo frente Antonio Jesús Canepa (https://github.com/ajcanepa).
 
 # 3. Metodología
 
-Hemos accedido a distintas fuentes de datos para recopilar información acerca de las horas de sol en España por provincias, así como el índice de radiación UV, las áreas verdes y el número de muertes por causa de patologías de piel.
+Hemos accedido a distintas fuentes de datos para recopilar información acerca de las horas de sol en España por provincias, así como el índice de radiación UV y el número de muertes por causa de patologías de piel.
 
 ## 3.1 Búsqueda de datos
 
@@ -71,6 +71,10 @@ En primer lugar, descargamos las librerías readr y tidyverse que necesitaremos 
 library(readr)
 library(tidyverse)
 library(dplyr)
+library(ggplot2)
+library(mapSpain)
+library(sf)
+
 
 Radiacion_solar <- read_delim(file = "INPUT/DATA/Radiacion_solar csv.csv",
                            delim = ";", escape_double = FALSE, trim_ws = TRUE)
@@ -78,15 +82,42 @@ Radiacion_solar <- read_delim(file = "INPUT/DATA/Radiacion_solar csv.csv",
 Radiacion_solar <- Radiacion_solar %>%
   rename (radiacion_solar_KWm2 = KW_por_m2)
 
+
+
 str(Radiacion_solar)
 summary(Radiacion_solar)
 view(Radiacion_solar)
+
+
+Provs <- esp_get_prov()%>%
+  rename("Localidad"=ine.prov.name)
+provincias<-st_as_sf(inner_join(y=Provs, x= Radiacion_solar, by="Localidad"))
+Can <- esp_get_can_box()
+ggplot(provincias) +
+  geom_sf(aes(fill =`radiacion_solar_KWm2`),
+    color = "grey70",
+    linewidth = .3
+  ) +
+  geom_sf(data = Can, color = "grey70") +
+  geom_sf_label(aes(label = `radiacion_solar_KWm2`),
+    fill = "white", alpha = 0.5,
+    size = 3,
+label.size = 0
+  ) +
+  scale_fill_gradientn(
+    colors = hcl.colors(15, "Greens", rev = TRUE),
+    n.breaks = 10,
+    labels = function(x) {
+      sprintf("%1.1f%%", 1 * x)
+    },
+    guide = guide_legend(title = "radiacion")
+  ) +
+  theme_void() +
+  theme(legend.position = c(0.1, 0.6))
 ```
 
 
 
-
-![Índice de radiación solar](INPUT/mapas/indice_radiacion.png)
 **Figura 2:** Índice de radiación solar
 
 
@@ -315,9 +346,6 @@ Para terminar, visualizamos los datos finales en un dataframe y en un gráfico d
 datos_horas_de_sol <- data.frame(
   c(medias)
 )
-
-#ggplot(data = datos_radiacion_solar, aes(x = Comunidad, y = KW_por_m2)) +
-  #geom_bar(stat = "identity")
 
 grafico_horas_de_sol <- ggplot(data = datos_horas_de_sol, aes(x = Comunidad, y = HorasDeSol)) +
   geom_bar(stat = "identity", fill = "blue") +
