@@ -75,3 +75,4 @@ grafico_defunciones_2022 <- ggplot(datos_def_dataframe, aes(x = reorder(Comunida
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 grafico_defunciones_2022
+

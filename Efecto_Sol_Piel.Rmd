@@ -515,6 +515,7 @@ datos_completo
 En último lugar,configuramos correctamente la salida de los datos y creamos la gráfica con los tres tipos de datos para su posterior comparación.
 
 ```{r Graficación-datos-completos}
+
 datos_completo_largo <- datos_completo %>%
   pivot_longer(cols = c(Defunciones, HorasDeSol, radiacion_solar_KWm2), 
                names_to = "Variable", 
@@ -530,6 +531,7 @@ grafico_completo <- ggplot(datos_completo_largo, aes(x = Comunidad, y = Valor, f
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 grafico_completo
+
 ```
 
 El análisis de resultados muestra que el índice de radiación solar guarda relación directa con el número de horas de sol. Sin embargo y como se ha comprobado en el punto 4.1, el número de horas de sol y las defunciones no parecen guardar correlación entre ellas.
@@ -545,10 +547,186 @@ Si nos basamos únicamente en la correlación entre defunciones y índice de rad
 Teniendo todo en cuenta, concluimos que no podemos afirmar que exista una correlación suficientemente fuerte, para decir que estas variables estén vinculadas.
 
 
-# 6. Referencias
+# 6. Cuestión adicional_Silvia Tobes
+
+Tras profundizar en el estudio anterior de los factores que podían guardar relación con la aparición de cáncer de piel en la población española, he caído en la cuenta de que tomar únicamente el número de muertes como factor principal para hallar correlación con el índice de radiación solar no es una medida fiable, pues aquellas comunidades con mayor población son las que, estadísticamente, recibirán más muertes, luego no podemos encontrar una solución que demuestre nuestra teoría.
+
+Por ende, he tomado en consideración la densidad de muertes por cáncer de piel en cada comunidad. Puesto que es muy laborioso encontrar una fuente de datos que refleje este factor, he obtenido esta densidad dividiendo el tamaño de la población que ha fallecido debido al cáncer de piel en un año entre la superficie de la comunidad en km^2 según el Instituto Geográfico Nacional.
+
+Comparando estos datos, trataremos de verificar si la radiación solar tiene una clara influencia sobre las muertes por cáncer de piel o no.
+
+Puesto que los datos no están estructurados, los cargamos desde csv. Instalamos las librerías necesarias. Con case_when asignamos el nombre de cada comunidad a las provincias que pertenecen a ella. Para otros valores no deseados se asigna NA, y con mutate añadimos el nombre de la comunidad a los datos estructurados generados.Puesto que Ceuta y Melilla aparecen en los datos, pero no los vamos a utilizar, uso filter la función filter para "eliminar" los valores nulos.
+
+```{r 1}
+poblac_superf <- read_delim(file = "INPUT/DATA/poblacion_superficie_provincias.csv",
+                           delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+str(poblac_superf)
+summary(poblac_superf)
+view(poblac_superf)
+```
+
+
+```{r 2}
+datos <- poblac_superf %>%
+  mutate(
+    Comunidad = case_when(
+      
+      Provincia %in% c("Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "Málaga", "Sevilla") ~ "Andalucía",
+      Provincia %in% c("Huesca", "Zaragoza", "Teruel") ~ "Aragón",
+      Provincia %in% c("Asturias") ~ "Asturias",
+      Provincia %in% c("Cantabria") ~ "Cantabria",
+      Provincia %in% c("Toledo", "Ciudad Real", "Guadalajara", "Cuenca", "Albacete") ~ "Castilla La Mancha",
+      Provincia %in% c("León", "Zamora", "Salamanca", "Palencia", "Valladolid", "Ávila", "Burgos", "Soria", "Segovia") ~ "Castilla y León",
+      Provincia %in% c("Lleida", "Girona", "Barcelona", "Tarragona") ~ "Cataluña",
+      Provincia %in% c("Castellón / Castelló", "Valencia / València", "Alicante / Alacant") ~ "Comunidad Valenciana",
+      Provincia %in% c("Cáceres", "Badajoz") ~ "Extremadura",
+      Provincia %in% c("Lugo", "Ourense", "Pontevedra", "A Coruña") ~ "Galicia",
+      Provincia %in% c("Illes Balears") ~ "Islas Baleares",
+      Provincia %in% c("Santa Cruz de Tenerife", "Las Palmas") ~ "Islas Canarias",
+      Provincia %in% c("La Rioja") ~ "La Rioja",
+      Provincia %in% c("Madrid") ~ "Madrid",
+      Provincia %in% c("Murcia") ~ "Murcia",
+      Provincia %in% c("Navarra") ~ "Navarra",
+      Provincia %in% c("Araba / Álava", "Bizkaia", "Gipuzkoa") ~ "País Vasco",
+      
+      TRUE ~ NA_character_
+    ))%>%
+  
+  filter(!is.na(Comunidad))
+
+print(datos)
+```
+
+
+Para el cálculo de superficies, sumamos las áreas con el mismo nombre de ccaa, y así tenemos la extensión territorial total de las comunidades. Con as.numeric nos aseguramos de que ambas columnas contengan datos numéricos. Si no, esta función los convierte.
+
+Añadimos los datos del archivo defunciones_2022 y la superficie total, y creamos un dataframe combinando las columnas por comunidad.
+
+
+```{r 3}
+datos$Superficie <- as.numeric(datos$`Superf. (km2)`)
+
+superficie_tot <- datos %>%
+  group_by(Comunidad) %>%
+  summarise(Superficie = sum(`Superf. (km2)`))
+
+print(superficie_tot)
+```
+
+```{r 4}
+datos_defunciones_2022
+
+datos_def_sup <- merge(datos_defunciones_2022, superficie_tot, by = "Comunidad")
+print(datos_def_sup)
+```
+
+
+A continuación, usaremos dplyr para calcular la densidad de muertes de cáncer de piel por comunidad autónoma, dividiendo las defunciones entre la superficie, y ordenar la densidad en descendiente. Este código elimina la necesidad del bucle for y realiza todas las operaciones de manera vectorizada y eficiente dentro de dplyr.
+
+```{r 5}
+
+datos_densidad <- datos_def_sup %>%
+  mutate(Densidad = ifelse(Superficie != 0, Defunciones / Superficie, NA)) %>% #evitar divisiones por cero
+  group_by(Comunidad) %>%
+  summarise(Densidad = mean(Densidad, na.rm = TRUE)) %>%  # Si hay duplicados en Comunidad, calcular la media
+  arrange(desc(Densidad)) 
+```
+
+Seguidamente, representamos en distintas formas gráficas los datos de interés.
+
+```{r 6}
+ggplot(datos_def_sup, aes(x = 2, y = Defunciones, fill = Comunidad)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  xlim(0.5, 2.5) + # Crea el agujero
+  theme_void() +
+  labs(
+    title = "Muertes por CCAA",
+    fill = "Comunidad"
+  ) +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+```{r 7}
+ggplot(data = datos_def_sup, aes(x = reorder(Comunidad, -Superficie), y = Superficie)) +
+  geom_bar(stat = "identity", fill = "darkolivegreen") + 
+  theme_minimal() + 
+  labs(
+    title = "Superficie por Comunidad Autónoma",
+    x = "Comunidad Autónoma",
+    y = "Superficie"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Rotar etiquetas del eje x
+
+```
+
+```{r 8}
+ggplot(data = datos_densidad) + 
+  geom_bar(
+    mapping = aes(x = reorder(Comunidad, -Densidad), y = Densidad, fill = Comunidad), 
+    stat = "identity", 
+    show.legend = FALSE, 
+    width = 1
+  ) + 
+  theme(aspect.ratio = 1) +
+  labs(
+    title = "Densidad de muertes por ccaa",
+    x = "Comunidad Autónoma", 
+    y = "Proporción de muertes"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Rotar etiquetas del eje x
+```
+
+Finalmente, creamos un gráfico de barras comparativo (es el más óptimo para el caso) de la densidad de defunciones por ccaa, y observamos los resultados. Cabe destacar que he multiplicado la densidad y dividido el índice de radiación para poder obserbar posibles diferencias, pues el tamaño de los números es dispar.
+
+```{r 9}
+
+datos_radiacion_solar
+datos_densidad
+
+def_rad <- merge (datos_densidad, datos_radiacion_solar, by= "Comunidad")
+def_rad <- def_rad %>%
+  mutate(
+    Densidad = Densidad * 10000,  # Multiplicar la densidad por 10,000
+    KW_por_m2 = KW_por_m2 /10,
+  )
+def_rad
+
+defs_rad <- def_rad %>%
+  pivot_longer(cols = c(Densidad, KW_por_m2), 
+               names_to = "Variable", 
+               values_to = "Valor")
+```
+
+
+```{r 10}
+ggplot(defs_rad, aes(x = reorder(Comunidad, Valor), y = Valor, fill = Variable)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) + 
+  labs(
+    title = "Muertes y KW/m² por ccaa",
+    x = "Comunidad Autónoma",
+    y = "Valores (Ajustados)",
+    fill = "Variable"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "top"
+  ) +
+  scale_fill_manual(values = c("Densidad" = "steelblue", "KW_por_m2" = "orange"))
+```
+
+A pesar de haber trabajado con unos datos más eficientes,el índice de radiación solar no parece influir excesivamente en el número de muertes por cáncer de piel, lo que lleva a la conclusión de que, o bien el efecto de la radiación no es decisivo sobre este tipo de muertes, o bien hacen falta más variables con las que trabajar.
+
+
+# 7. Referencias
 
 - Apuntes proporcionados por el profesor
 - r-charts.com
 - rpubs.com
 - ggplot2.tidyverse.org
 - opensciencelabs.org
+
+
+

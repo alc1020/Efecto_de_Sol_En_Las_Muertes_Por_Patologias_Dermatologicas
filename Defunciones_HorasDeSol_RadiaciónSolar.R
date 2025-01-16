@@ -15,7 +15,7 @@ datos_completo <- merge(datos_completo, datos_radiacion_solar, by = "Comunidad")
 
 # Transformar los datos a formato largo para ggplot
 datos_completo_largo <- datos_completo %>%
-  pivot_longer(cols = c(Defunciones, HorasDeSol, KW_por_m2), 
+  pivot_longer(cols = c(Densidad, HorasDeSol, KW_por_m2), 
                names_to = "Variable", 
                values_to = "Valor")
 

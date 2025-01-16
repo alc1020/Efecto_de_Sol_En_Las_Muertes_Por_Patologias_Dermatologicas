@@ -10,7 +10,7 @@ Radiacion_solar
 
 str(Radiacion_solar)
 summary(Radiacion_solar)
-view(Radiacion_solar)
+#view(Radiacion_solar)
 
 
 datosrad <- Radiacion_solar %>%
